@@ -1,0 +1,26 @@
+{
+    "name": "lcobucci/content-negotiation-middleware",
+    "description": "A PSR-15 middleware to handle content negotiation",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Luís Cobucci",
+            "email": "lcobucci@gmail.com"
+        }
+    ],
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    },
+    "require": {
+        "php": "^7.2",
+        "fig/http-message-util": "^1.1",
+        "psr/http-server-middleware": "^1.0"
+    }
+}
