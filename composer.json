@@ -22,5 +22,14 @@
         "php": "^7.2",
         "fig/http-message-util": "^1.1",
         "psr/http-server-middleware": "^1.0"
+    },
+    "require-dev": {
+        "doctrine/coding-standard": "^4.0",
+        "infection/infection": "^0.8",
+        "phpstan/phpstan": "^0.10@dev",
+        "phpstan/phpstan-phpunit": "^0.10@dev",
+        "phpstan/phpstan-strict-rules": "^0.10@dev",
+        "phpunit/phpunit": "^7.0",
+        "squizlabs/php_codesniffer": "^3.2"
     }
 }
