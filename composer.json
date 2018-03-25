@@ -30,7 +30,11 @@
         "phpstan/phpstan-phpunit": "^0.10@dev",
         "phpstan/phpstan-strict-rules": "^0.10@dev",
         "phpunit/phpunit": "^7.0",
-        "squizlabs/php_codesniffer": "^3.2"
+        "squizlabs/php_codesniffer": "^3.2",
+        "zendframework/zend-diactoros": "^1.7"
+    },
+    "suggest": {
+        "zendframework/zend-diactoros": "For concrete implementation of PSR-7"
     },
     "autoload": {
         "psr-4": {
