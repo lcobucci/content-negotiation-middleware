@@ -31,5 +31,15 @@
         "phpstan/phpstan-strict-rules": "^0.10@dev",
         "phpunit/phpunit": "^7.0",
         "squizlabs/php_codesniffer": "^3.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Lcobucci\\ContentNegotiation\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Lcobucci\\ContentNegotiation\\Tests\\": "tests"
+        }
     }
 }
