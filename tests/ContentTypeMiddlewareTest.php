@@ -14,7 +14,6 @@ use Psr\Http\Server\RequestHandlerInterface;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\Response\EmptyResponse;
 use Zend\Diactoros\ServerRequest;
-use function json_encode;
 
 /**
  * @coversDefaultClass \Lcobucci\ContentNegotiation\ContentTypeMiddleware
@@ -27,6 +26,8 @@ final class ContentTypeMiddlewareTest extends TestCase
      * @covers ::__construct()
      * @covers ::fromRecommendedSettings()
      * @covers ::process()
+     *
+     * @uses \Lcobucci\ContentNegotiation\Formatter\Json
      */
     public function processShouldReturnFormattedResponseDirectly(): void
     {
@@ -48,6 +49,7 @@ final class ContentTypeMiddlewareTest extends TestCase
      * @covers ::formatResponse()
      *
      * @uses \Lcobucci\ContentNegotiation\UnformattedResponse
+     * @uses \Lcobucci\ContentNegotiation\Formatter\Json
      */
     public function processShouldReturnAResponseWithErrorWhenFormatterWasNotFound(): void
     {
@@ -75,6 +77,7 @@ final class ContentTypeMiddlewareTest extends TestCase
      * @covers ::formatResponse()
      *
      * @uses \Lcobucci\ContentNegotiation\UnformattedResponse
+     * @uses \Lcobucci\ContentNegotiation\Formatter\Json
      */
     public function processShouldReturnAResponseWithFormattedContent(): void
     {
@@ -90,7 +93,7 @@ final class ContentTypeMiddlewareTest extends TestCase
         self::assertInstanceOf(UnformattedResponse::class, $response);
         self::assertSame(StatusCodeInterface::STATUS_OK, $response->getStatusCode());
         self::assertSame('application/json; charset=UTF-8', $response->getHeaderLine('Content-Type'));
-        self::assertSame('{"id":1,"name":"Testing"}', (string) $response->getBody());
+        self::assertJsonStringEqualsJsonString('{"id":1,"name":"Testing"}', (string) $response->getBody());
     }
 
     /**
@@ -103,6 +106,7 @@ final class ContentTypeMiddlewareTest extends TestCase
      * @covers ::formatResponse()
      *
      * @uses \Lcobucci\ContentNegotiation\UnformattedResponse
+     * @uses \Lcobucci\ContentNegotiation\Formatter\Json
      */
     public function processShouldReturnAResponseWithFormattedContentEvenWithoutForcingTheCharset(): void
     {
@@ -118,7 +122,7 @@ final class ContentTypeMiddlewareTest extends TestCase
         self::assertInstanceOf(UnformattedResponse::class, $response);
         self::assertSame(StatusCodeInterface::STATUS_OK, $response->getStatusCode());
         self::assertSame('application/json', $response->getHeaderLine('Content-Type'));
-        self::assertSame('{"id":1,"name":"Testing"}', (string) $response->getBody());
+        self::assertJsonStringEqualsJsonString('{"id":1,"name":"Testing"}', (string) $response->getBody());
     }
 
     private function createRequestHandler(ResponseInterface $response): RequestHandlerInterface
@@ -160,18 +164,7 @@ final class ContentTypeMiddlewareTest extends TestCase
                     'charset' => $forceCharset,
                 ],
             ],
-            [
-                'application/json' => new class implements Formatter
-                {
-                    /**
-                     * {@inheritdoc}
-                     */
-                    public function format($content): string
-                    {
-                        return (string) json_encode($content);
-                    }
-                },
-            ]
+            ['application/json' => new Formatter\Json()]
         );
     }
 }
