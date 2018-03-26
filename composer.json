@@ -26,6 +26,7 @@
     "require-dev": {
         "doctrine/coding-standard": "^4.0",
         "infection/infection": "^0.8",
+        "jms/serializer": "^1.11",
         "middlewares/negotiation": "^1.0",
         "phpstan/phpstan": "^0.10@dev",
         "phpstan/phpstan-phpunit": "^0.10@dev",
@@ -35,6 +36,7 @@
         "zendframework/zend-diactoros": "^1.7"
     },
     "suggest": {
+        "jms/serializer": "For content formatting using a more flexible serializer",
         "middlewares/negotiation": "For acceptable format identification",
         "zendframework/zend-diactoros": "For concrete implementation of PSR-7"
     },
