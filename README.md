@@ -71,10 +71,12 @@ $middleware = ContentTypeMiddleware::fromRecommendedSettings(
             'charset' => true,
         ],
     ],
-    // It's very important to mention that the first format will be
-    // used as fallback (no acceptable mime type found), that the
-    // order of elements does matter, and that the first element of
-    // `mime-type` list will be used as negotiated type.
+    // It's very important to mention that:
+    //
+    // * the first format will be used as fallback (no acceptable mime type
+    // found)
+    // * the order of elements does matter
+    // * the first element of `mime-type` list will be used as negotiated type
 
 
     // The second argument is the list of formatters that will be used for
