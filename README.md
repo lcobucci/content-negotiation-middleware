@@ -9,15 +9,156 @@
 [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/lcobucci/content-negotiation-middleware/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/lcobucci/content-negotiation-middleware/?branch=master)
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/lcobucci/content-negotiation-middleware/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/lcobucci/content-negotiation-middleware/?branch=master)
 
-The goal of this middleware is to provide full content negotiation, so it
-detects the most appropriated mime type requested by the client and formats
-the response using the best formatter.
+## Motivation
+
+Packages like `middlewares/negotiation` do a very good job to detect the correct
+content type based on the `Accept` header (or extension in the URI), however they
+delegate to the `RequestHandler` to format the content according to the detected
+mime type.
+
+That works fine for most cases but it usually creates a lot of duplication in
+complex software, where every single `RequestHandler` should do that formatting
+(or depend on some component to do that). That logic should also be added to the
+middleware that handles exceptions and converts them to the appropriated HTTP
+response.
+
+The goal of this middleware is to provide full content negotiation (detection
+and formatting).
 
 ## Installation
 
-Package is available on [Packagist](http://packagist.org/packages/lcobucci/content-negotiation-middleware),
-you can install it using [Composer](http://getcomposer.org).
+This package is available on [Packagist](http://packagist.org/packages/lcobucci/content-negotiation-middleware),
+and we recommend you to install it using [Composer](http://getcomposer.org):
 
 ```shell
-composer require lcobucci/content-negotiation-middleware
+composer require lcobucci/content-negotiation-middleware middlewares/negotiation zendframework/zend-diactoros
 ```
+
+### Adventure mode
+
+If you're ready for an adventure and don't want to use `middlewares/negotiation`
+to handle the detection or `zendframework/zend-diactoros` to create the response
+body (`StreamInterface` implementation), don't despair! You'll only have to use
+the normal `ContentTypeMiddleware::__construct()` instead of
+`ContentTypeMiddleware::fromRecommendedSettings()`.
+
+We do have a small preference for the mentioned packages and didn't want to reinvent
+the wheel... but you know, it's a free world.
+
+## Usage
+
+Your very first step is to create the middleware using the correct configuration:
+
+```php
+<?php
+declare(strict_types=1);
+
+use Lcobucci\ContentNegotiation\ContentTypeMiddleware;
+use Lcobucci\ContentNegotiation\Formatter\Json;
+use Lcobucci\ContentNegotiation\Formatter\StringCast;
+
+$middleware = ContentTypeMiddleware::fromRecommendedSettings(
+    // First argument is the list of formats you want to support:
+    [
+        'json' => [
+            'extension' => ['json'],
+            'mime-type' => ['application/json', 'text/json', 'application/x-json'],
+            'charset' => true,
+        ],
+        'html' => [
+            'extension' => ['html', 'htm', 'php'],
+            'mime-type' => ['text/html', 'application/xhtml+xml'],
+            'charset' => true,
+        ],
+    ],
+    // It's very important to mention that the first format will be
+    // used as fallback (no acceptable mime type found), that the
+    // order of elements does matter, and that the first element of
+    // `mime-type` list will be used as negotiated type.
+
+
+    // The second argument is the list of formatters that will be used for
+    // each mime type:
+    [
+        'application/json' => new Json(),
+        'text/html'        => new StringCast(),
+    ]
+);
+```
+
+Then you must add the middleware to very beginning of your pipeline, which will
+depend on the library/framework you're using, but it will be something similar
+to this:
+
+```php
+<?php
+
+// ...
+
+$application->pipe($middleware);
+```
+
+Finally you just need to use `UnformattedResponse` as return of the request
+handlers you create to trigger to formatting when needed:
+
+```php
+<?php
+declare(strict_types=1);
+
+namespace Me\MyApp;
+
+use Fig\Http\Message\StatusCodeInterface;
+use Lcobucci\ContentNegotiation\UnformattedResponse;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\RequestHandlerInterface;
+use Zend\Diactoros\Response;
+use Zend\Diactoros\ServerRequest;
+
+final class MyHandler implements ServerRequestInterface
+{
+    public function handle(ServerRequestInterface $request): ResponseInterface
+    {
+        // Does the necessary process and creates `$result` with the unformatted
+        // content.
+
+        return new UnformattedResponse(
+            (new Response())->withStatus(StatusCodeInterface::STATUS_CREATED),
+            $result
+        );
+    }
+}
+```
+
+### Formatters
+
+We provide some basic formatters by default: `Json`, `StringCast`, and
+`JmsSerializer` (this one requires you to also install `jms/serializer`, sure).
+
+If you want to create a customised formatter the only thing needed is to
+implement the `Formatter` interface:
+
+```php
+<?php
+declare(strict_types=1);
+
+namespace Me\MyApp;
+
+use Lcobucci\ContentNegotiation\Formatter;
+
+final class MyFancyFormatter implements Formatter
+{
+    public function format($content): string
+    {
+        // Performs all the magic with $content and creates $result with a
+        // `string` containing the formatted data.
+
+        return $result;
+    }
+}
+```
+
+## License
+
+MIT, see [LICENSE file](https://github.com/lcobucci/content-negotiation-middleware/blob/master/LICENSE).
+
