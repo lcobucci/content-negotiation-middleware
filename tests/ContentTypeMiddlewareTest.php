@@ -3,10 +3,12 @@ declare(strict_types=1);
 
 namespace Lcobucci\ContentNegotiation\Tests;
 
+use AssertionError;
 use Fig\Http\Message\StatusCodeInterface;
 use Lcobucci\ContentNegotiation\ContentTypeMiddleware;
 use Lcobucci\ContentNegotiation\Formatter;
 use Lcobucci\ContentNegotiation\UnformattedResponse;
+use PHPUnit\Framework\Error\Warning;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -14,6 +16,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\Response\EmptyResponse;
 use Zend\Diactoros\ServerRequest;
+use function ini_set;
 
 /**
  * @coversDefaultClass \Lcobucci\ContentNegotiation\ContentTypeMiddleware
@@ -125,6 +128,63 @@ final class ContentTypeMiddlewareTest extends TestCase
         self::assertJsonStringEqualsJsonString('{"id":1,"name":"Testing"}', (string) $response->getBody());
     }
 
+    /**
+     * @test
+     *
+     * @covers ::__construct()
+     * @covers ::fromRecommendedSettings()
+     * @covers ::process()
+     * @covers ::extractContentType()
+     * @covers ::formatResponse()
+     *
+     * @uses \Lcobucci\ContentNegotiation\UnformattedResponse
+     * @uses \Lcobucci\ContentNegotiation\Formatter\Json
+     */
+    public function processShouldRaiseExceptionWhenInvalidStreamWasCreatedInDevelopmentMode(): void
+    {
+        ini_set('assert.exception', '1');
+
+        $this->expectException(AssertionError::class);
+        $this->processWithInvalidStreamFactory();
+    }
+
+    /**
+     * @test
+     *
+     * @covers ::__construct()
+     * @covers ::fromRecommendedSettings()
+     * @covers ::process()
+     * @covers ::extractContentType()
+     * @covers ::formatResponse()
+     *
+     * @uses \Lcobucci\ContentNegotiation\UnformattedResponse
+     * @uses \Lcobucci\ContentNegotiation\Formatter\Json
+     */
+    public function processShouldRaiseAWarningWhenInvalidStreamWasCreatedInDevelopmentMode(): void
+    {
+        ini_set('assert.exception', '0');
+
+        $this->expectException(Warning::class);
+        $this->processWithInvalidStreamFactory();
+    }
+
+    private function processWithInvalidStreamFactory(): void
+    {
+        $middleware = $this->createMiddleware(
+            true,
+            function () {
+                return false;
+            }
+        );
+
+        $middleware->process(
+            new ServerRequest(),
+            $this->createRequestHandler(
+                new UnformattedResponse(new Response(), new PersonDto(1, 'Testing'))
+            )
+        );
+    }
+
     private function createRequestHandler(ResponseInterface $response): RequestHandlerInterface
     {
         return new class($response) implements RequestHandlerInterface
@@ -149,7 +209,7 @@ final class ContentTypeMiddlewareTest extends TestCase
         };
     }
 
-    private function createMiddleware(bool $forceCharset = true): ContentTypeMiddleware
+    private function createMiddleware(bool $forceCharset = true, ?callable $streamFactory = null): ContentTypeMiddleware
     {
         return ContentTypeMiddleware::fromRecommendedSettings(
             [
@@ -164,7 +224,8 @@ final class ContentTypeMiddlewareTest extends TestCase
                     'charset' => $forceCharset,
                 ],
             ],
-            ['application/json' => new Formatter\Json()]
+            ['application/json' => new Formatter\Json()],
+            $streamFactory
         );
     }
 }

@@ -11,6 +11,7 @@ use Psr\Http\Message\StreamInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Zend\Diactoros\Stream;
+use function assert;
 use function strpos;
 use function substr;
 
@@ -56,8 +57,8 @@ final class ContentTypeMiddleware implements MiddlewareInterface
         return new self(
             new ContentType($formats),
             $formatters,
-            function () use ($streamFactory): StreamInterface {
-                return $streamFactory !== null ? $streamFactory() : new Stream('php://temp', 'wb+');
+            $streamFactory ?? function (): StreamInterface {
+                return new Stream('php://temp', 'wb+');
             }
         );
     }
@@ -97,8 +98,9 @@ final class ContentTypeMiddleware implements MiddlewareInterface
      */
     private function formatResponse(UnformattedResponse $response, ?Formatter $formatter): ResponseInterface
     {
-        /** @var StreamInterface $body */
-        $body     = ($this->streamFactory)();
+        $body = ($this->streamFactory)();
+        assert($body instanceof StreamInterface);
+
         $response = $response->withBody($body);
 
         if ($formatter === null) {
