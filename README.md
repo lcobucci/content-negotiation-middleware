@@ -45,6 +45,20 @@ the normal `ContentTypeMiddleware::__construct()` instead of
 We do have a small preference for the mentioned packages and didn't want to reinvent
 the wheel... but you know, it's a free world.
 
+## PHP Configuration
+
+In order to make sure that other components are returning the expected objects we decided
+to use `assert()`, which is a very interesting feature in PHP but not often used.
+The nice thing about `assert()` is that we can (and should) disable it in production mode
+so that we don't have useless statements.
+
+So, for production mode, we recommend you to set `zend.assertions` to `-1` in your `php.ini`.
+For development you should leave `zend.assertions` as `1` and set `assert.exception` to `1`, which
+will make PHP throw an [`AssertionError`](https://secure.php.net/manual/en/class.assertionerror.php)
+when things go wrong.
+
+Check the documentation for more information: https://secure.php.net/manual/en/function.assert.php
+
 ## Usage
 
 Your very first step is to create the middleware using the correct configuration:
