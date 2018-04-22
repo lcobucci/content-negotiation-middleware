@@ -30,6 +30,56 @@ final class UnformattedResponseTest extends TestCase
     /**
      * @test
      *
+     * @covers ::withAttribute()
+     *
+     * @uses \Lcobucci\ContentNegotiation\UnformattedResponse::__construct()
+     */
+    public function withAttributeShouldReturnANewInstanceWithTheAddedAttribute(): void
+    {
+        $response1 = new UnformattedResponse(new Response(), new PersonDto(1, 'Testing'));
+        $response2 = $response1->withAttribute('test', 1);
+
+        self::assertAttributeSame([], 'attributes', $response1);
+        self::assertAttributeSame(['test' => 1], 'attributes', $response2);
+    }
+
+    /**
+     * @test
+     *
+     * @covers ::__construct()
+     * @covers ::withAttribute()
+     */
+    public function withAttributeShouldOverrideExistingAttributes(): void
+    {
+        $response = new UnformattedResponse(
+            new Response(),
+            new PersonDto(1, 'Testing'),
+            ['test' => 1]
+        );
+
+        self::assertAttributeSame(['test' => 2], 'attributes', $response->withAttribute('test', 2));
+    }
+
+    /**
+     * @test
+     *
+     * @covers ::__construct()
+     * @covers ::getAttributes()
+     */
+    public function getAttributesShouldReturnTheConfiguredAttributes(): void
+    {
+        $response = new UnformattedResponse(
+            new Response(),
+            new PersonDto(1, 'Testing'),
+            ['test' => 1]
+        );
+
+        self::assertSame(['test' => 1], $response->getAttributes());
+    }
+
+    /**
+     * @test
+     *
      * @covers ::__construct
      * @covers ::getProtocolVersion()
      */
@@ -200,10 +250,11 @@ final class UnformattedResponseTest extends TestCase
         $decoratedResponse = new Response();
         $dto               = new PersonDto(1, 'Testing');
 
-        $response = new UnformattedResponse($decoratedResponse, $dto);
+        $response = new UnformattedResponse($decoratedResponse, $dto, ['test' => 1]);
         $expected = new UnformattedResponse(
             $decoratedResponse->$method(...$arguments),
-            $dto
+            $dto,
+            ['test' => 1]
         );
 
         self::assertEquals($expected, $response->$method(...$arguments));
