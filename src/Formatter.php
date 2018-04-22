@@ -9,7 +9,7 @@ interface Formatter
      * @param mixed   $content
      * @param mixed[] $attributes
      *
-     * @throw ContentCouldNotBeFormatted
+     * @throws ContentCouldNotBeFormatted
      */
     public function format($content, array $attributes = []): string;
 }
