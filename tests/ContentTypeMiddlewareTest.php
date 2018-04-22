@@ -17,6 +17,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\Response\EmptyResponse;
 use Zend\Diactoros\ServerRequest;
+use function array_map;
 use function ini_set;
 
 /**
@@ -24,6 +25,21 @@ use function ini_set;
  */
 final class ContentTypeMiddlewareTest extends TestCase
 {
+    private const SUPPORTED_FORMATS = [
+        'json' => [
+            'extension' => ['json'],
+            'mime-type' => ['application/json', 'text/json', 'application/x-json'],
+        ],
+        'txt'  => [
+            'extension' => ['txt'],
+            'mime-type' => ['text/plain'],
+        ],
+        'html' => [
+            'extension' => ['html', 'htm'],
+            'mime-type' => ['text/html', 'application/xhtml+xml'],
+        ],
+    ];
+
     /**
      * @test
      *
@@ -248,28 +264,25 @@ final class ContentTypeMiddlewareTest extends TestCase
     private function createMiddleware(bool $forceCharset = true, ?callable $streamFactory = null): ContentTypeMiddleware
     {
         return ContentTypeMiddleware::fromRecommendedSettings(
-            [
-                'json' => [
-                    'extension' => ['json'],
-                    'mime-type' => ['application/json', 'text/json', 'application/x-json'],
-                    'charset' => $forceCharset,
-                ],
-                'txt' => [
-                    'extension' => ['txt'],
-                    'mime-type' => ['text/plain'],
-                    'charset' => $forceCharset,
-                ],
-                'html' => [
-                    'extension' => ['html', 'htm'],
-                    'mime-type' => ['text/html', 'application/xhtml+xml'],
-                    'charset'   => $forceCharset,
-                ],
-            ],
+            $this->configureCharset($forceCharset),
             [
                 'application/json' => new Formatter\Json(),
                 'text/html'        => new NaiveTemplateEngine(),
             ],
             $streamFactory
+        );
+    }
+
+    /**
+     * @return mixed[]
+     */
+    private function configureCharset(bool $forceCharset = true): array
+    {
+        return array_map(
+            function (array $config) use ($forceCharset): array {
+                return ['charset' => $forceCharset] + $config;
+            },
+            self::SUPPORTED_FORMATS
         );
     }
 }
