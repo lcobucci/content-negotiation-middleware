@@ -33,7 +33,7 @@ final class Json implements Formatter
     /**
      * {@inheritdoc}
      */
-    public function format($content): string
+    public function format($content, array $attributes = []): string
     {
         try {
             $encoded = json_encode($content, $this->flags);

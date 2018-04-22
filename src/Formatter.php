@@ -6,9 +6,10 @@ namespace Lcobucci\ContentNegotiation;
 interface Formatter
 {
     /**
-     * @param mixed $content
+     * @param mixed   $content
+     * @param mixed[] $attributes
      *
      * @throw ContentCouldNotBeFormatted
      */
-    public function format($content): string;
+    public function format($content, array $attributes = []): string;
 }

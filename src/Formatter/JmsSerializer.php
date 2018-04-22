@@ -30,7 +30,7 @@ final class JmsSerializer implements Formatter
     /**
      * {@inheritdoc}
      */
-    public function format($content): string
+    public function format($content, array $attributes = []): string
     {
         try {
             return $this->serializer->serialize($content, $this->format);

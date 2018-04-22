@@ -13,7 +13,7 @@ final class StringCast implements Formatter
     /**
      * {@inheritdoc}
      */
-    public function format($content): string
+    public function format($content, array $attributes = []): string
     {
         if (is_object($content) && ! method_exists($content, '__toString')) {
             throw new ContentCouldNotBeFormatted('Given data could not be cast to string');
