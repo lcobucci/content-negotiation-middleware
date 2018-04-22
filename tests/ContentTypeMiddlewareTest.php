@@ -7,6 +7,7 @@ use AssertionError;
 use Fig\Http\Message\StatusCodeInterface;
 use Lcobucci\ContentNegotiation\ContentTypeMiddleware;
 use Lcobucci\ContentNegotiation\Formatter;
+use Lcobucci\ContentNegotiation\Tests\Formatter\NaiveTemplateEngine;
 use Lcobucci\ContentNegotiation\UnformattedResponse;
 use PHPUnit\Framework\Error\Warning;
 use PHPUnit\Framework\TestCase;
@@ -60,9 +61,7 @@ final class ContentTypeMiddlewareTest extends TestCase
 
         $response = $middleware->process(
             (new ServerRequest())->withAddedHeader('Accept', 'text/plain'),
-            $this->createRequestHandler(
-                new UnformattedResponse(new Response(), new PersonDto(1, 'Testing'))
-            )
+            $this->createRequestHandler($this->createResponse())
         );
 
         self::assertInstanceOf(UnformattedResponse::class, $response);
@@ -88,9 +87,7 @@ final class ContentTypeMiddlewareTest extends TestCase
 
         $response = $middleware->process(
             new ServerRequest(),
-            $this->createRequestHandler(
-                new UnformattedResponse(new Response(), new PersonDto(1, 'Testing'))
-            )
+            $this->createRequestHandler($this->createResponse())
         );
 
         self::assertInstanceOf(UnformattedResponse::class, $response);
@@ -111,15 +108,44 @@ final class ContentTypeMiddlewareTest extends TestCase
      * @uses \Lcobucci\ContentNegotiation\UnformattedResponse
      * @uses \Lcobucci\ContentNegotiation\Formatter\Json
      */
+    public function processShouldPassAttributesToTheFormatterProperly(): void
+    {
+        $middleware = $this->createMiddleware();
+
+        $response = $middleware->process(
+            (new ServerRequest())->withAddedHeader('Accept', 'text/html'),
+            $this->createRequestHandler($this->createResponse(['template' => 'person']))
+        );
+
+        self::assertInstanceOf(UnformattedResponse::class, $response);
+        self::assertSame(StatusCodeInterface::STATUS_OK, $response->getStatusCode());
+        self::assertSame('text/html; charset=UTF-8', $response->getHeaderLine('Content-Type'));
+
+        $body = (string) $response->getBody();
+
+        self::assertContains('<dd>1</dd>', $body);
+        self::assertContains('<dd>Testing</dd>', $body);
+    }
+
+    /**
+     * @test
+     *
+     * @covers ::__construct()
+     * @covers ::fromRecommendedSettings()
+     * @covers ::process()
+     * @covers ::extractContentType()
+     * @covers ::formatResponse()
+     *
+     * @uses \Lcobucci\ContentNegotiation\UnformattedResponse
+     * @uses \Lcobucci\ContentNegotiation\Formatter\Json
+     */
     public function processShouldReturnAResponseWithFormattedContentEvenWithoutForcingTheCharset(): void
     {
         $middleware = $this->createMiddleware(false);
 
         $response = $middleware->process(
             new ServerRequest(),
-            $this->createRequestHandler(
-                new UnformattedResponse(new Response(), new PersonDto(1, 'Testing'))
-            )
+            $this->createRequestHandler($this->createResponse())
         );
 
         self::assertInstanceOf(UnformattedResponse::class, $response);
@@ -179,9 +205,19 @@ final class ContentTypeMiddlewareTest extends TestCase
 
         $middleware->process(
             new ServerRequest(),
-            $this->createRequestHandler(
-                new UnformattedResponse(new Response(), new PersonDto(1, 'Testing'))
-            )
+            $this->createRequestHandler($this->createResponse())
+        );
+    }
+
+    /**
+     * @param mixed[] $attributes
+     */
+    private function createResponse(array $attributes = []): UnformattedResponse
+    {
+        return new UnformattedResponse(
+            new Response(),
+            new PersonDto(1, 'Testing'),
+            $attributes
         );
     }
 
@@ -223,8 +259,16 @@ final class ContentTypeMiddlewareTest extends TestCase
                     'mime-type' => ['text/plain'],
                     'charset' => $forceCharset,
                 ],
+                'html' => [
+                    'extension' => ['html', 'htm'],
+                    'mime-type' => ['text/html', 'application/xhtml+xml'],
+                    'charset'   => $forceCharset,
+                ],
             ],
-            ['application/json' => new Formatter\Json()],
+            [
+                'application/json' => new Formatter\Json(),
+                'text/html'        => new NaiveTemplateEngine(),
+            ],
             $streamFactory
         );
     }

@@ -107,7 +107,7 @@ final class ContentTypeMiddleware implements MiddlewareInterface
             return $response->withStatus(StatusCodeInterface::STATUS_NOT_ACCEPTABLE);
         }
 
-        $body->write($formatter->format($response->getUnformattedContent()));
+        $body->write($formatter->format($response->getUnformattedContent(), $response->getAttributes()));
         $body->rewind();
 
         return $response;

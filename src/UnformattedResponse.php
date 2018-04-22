@@ -19,12 +19,22 @@ final class UnformattedResponse implements ResponseInterface
     private $unformattedContent;
 
     /**
-     * @param mixed $unformattedContent
+     * @var mixed[]
      */
-    public function __construct(ResponseInterface $decoratedResponse, $unformattedContent)
-    {
+    private $attributes;
+
+    /**
+     * @param mixed   $unformattedContent
+     * @param mixed[] $attributes
+     */
+    public function __construct(
+        ResponseInterface $decoratedResponse,
+        $unformattedContent,
+        array $attributes = []
+    ) {
         $this->decoratedResponse  = $decoratedResponse;
         $this->unformattedContent = $unformattedContent;
+        $this->attributes         = $attributes;
     }
 
     /**
@@ -50,7 +60,8 @@ final class UnformattedResponse implements ResponseInterface
     {
         return new self(
             $this->decoratedResponse->withProtocolVersion($version),
-            $this->unformattedContent
+            $this->unformattedContent,
+            $this->attributes
         );
     }
 
@@ -93,7 +104,8 @@ final class UnformattedResponse implements ResponseInterface
     {
         return new self(
             $this->decoratedResponse->withHeader($name, $value),
-            $this->unformattedContent
+            $this->unformattedContent,
+            $this->attributes
         );
     }
 
@@ -104,7 +116,8 @@ final class UnformattedResponse implements ResponseInterface
     {
         return new self(
             $this->decoratedResponse->withAddedHeader($name, $value),
-            $this->unformattedContent
+            $this->unformattedContent,
+            $this->attributes
         );
     }
 
@@ -115,7 +128,8 @@ final class UnformattedResponse implements ResponseInterface
     {
         return new self(
             $this->decoratedResponse->withoutHeader($name),
-            $this->unformattedContent
+            $this->unformattedContent,
+            $this->attributes
         );
     }
 
@@ -134,7 +148,8 @@ final class UnformattedResponse implements ResponseInterface
     {
         return new self(
             $this->decoratedResponse->withBody($body),
-            $this->unformattedContent
+            $this->unformattedContent,
+            $this->attributes
         );
     }
 
@@ -153,7 +168,8 @@ final class UnformattedResponse implements ResponseInterface
     {
         return new self(
             $this->decoratedResponse->withStatus($code, $reasonPhrase),
-            $this->unformattedContent
+            $this->unformattedContent,
+            $this->attributes
         );
     }
 
@@ -163,5 +179,29 @@ final class UnformattedResponse implements ResponseInterface
     public function getReasonPhrase()
     {
         return $this->decoratedResponse->getReasonPhrase();
+    }
+
+    /**
+     * Returns an instance with the specified attribute
+     *
+     * @param mixed $value
+     */
+    public function withAttribute(string $name, $value): self
+    {
+        return new self(
+            $this->decoratedResponse,
+            $this->unformattedContent,
+            [$name => $value] + $this->attributes
+        );
+    }
+
+    /**
+     * Retrieve the configured attributes
+     *
+     * @return mixed[]
+     */
+    public function getAttributes(): array
+    {
+        return $this->attributes;
     }
 }
