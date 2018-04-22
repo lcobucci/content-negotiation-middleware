@@ -153,6 +153,7 @@ We provide some basic formatters by default:
 * `StringCast`
 * `JmsSerializer` (requires you to also install and configure [`jms/serializer`](https://jmsyst.com/libs/serializer))
 * `Plates` (requires you to also install and configure [`league/plates`](http://platesphp.com))
+* `Twig` (requires you to also install and configure [`twig/twig`](https://twig.symfony.com))
 
 If you want to create a customised formatter the only thing needed is to
 implement the `Formatter` interface:
