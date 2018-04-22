@@ -163,7 +163,7 @@ use Lcobucci\ContentNegotiation\Formatter;
 
 final class MyFancyFormatter implements Formatter
 {
-    public function format($content): string
+    public function format($content, array $attributes = []): string
     {
         // Performs all the magic with $content and creates $result with a
         // `string` containing the formatted data.
