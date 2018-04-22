@@ -147,8 +147,13 @@ final class MyHandler implements RequestHandlerInterface
 
 ### Formatters
 
-We provide some basic formatters by default: `Json`, `StringCast`, and
-`JmsSerializer` (this one requires you to also install `jms/serializer`, sure).
+We provide some basic formatters by default:
+
+* `Json`
+* `StringCast`
+* `JmsSerializer` (requires you to also install and configure [`jms/serializer`](https://jmsyst.com/libs/serializer))
+* `Plates` (requires you to also install and configure [`league/plates`](http://platesphp.com))
+* `Twig` (requires you to also install and configure [`twig/twig`](https://twig.symfony.com))
 
 If you want to create a customised formatter the only thing needed is to
 implement the `Formatter` interface:
@@ -163,7 +168,7 @@ use Lcobucci\ContentNegotiation\Formatter;
 
 final class MyFancyFormatter implements Formatter
 {
-    public function format($content): string
+    public function format($content, array $attributes = []): string
     {
         // Performs all the magic with $content and creates $result with a
         // `string` containing the formatted data.

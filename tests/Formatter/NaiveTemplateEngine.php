@@ -14,7 +14,7 @@ use function trim;
 
 final class NaiveTemplateEngine implements Formatter
 {
-    private const BASE_DIR  = __DIR__ . '/templates/naive/';
+    private const BASE_DIR  = __DIR__ . '/../../templates/naive/';
     private const EXTENSION = 'html';
 
     /**
