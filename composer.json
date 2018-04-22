@@ -27,6 +27,7 @@
         "doctrine/coding-standard": "^4.0",
         "infection/infection": "^0.8",
         "jms/serializer": "^1.11",
+        "league/plates": "^3.3",
         "middlewares/negotiation": "^1.0",
         "phpstan/phpstan": "^0.10@dev",
         "phpstan/phpstan-phpunit": "^0.10@dev",
@@ -37,6 +38,7 @@
     },
     "suggest": {
         "jms/serializer": "For content formatting using a more flexible serializer",
+        "league/plates": "For content formatting using Plates as template engine",
         "middlewares/negotiation": "For acceptable format identification",
         "zendframework/zend-diactoros": "For concrete implementation of PSR-7"
     },
