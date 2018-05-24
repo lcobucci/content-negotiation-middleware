@@ -25,7 +25,7 @@
     },
     "require-dev": {
         "doctrine/coding-standard": "^4.0",
-        "infection/infection": "^0.8",
+        "infection/infection": "dev-master@dev",
         "jms/serializer": "^1.11",
         "league/plates": "^3.3",
         "middlewares/negotiation": "^1.0",
