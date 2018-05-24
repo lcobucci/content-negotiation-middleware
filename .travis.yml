@@ -23,6 +23,7 @@ jobs:
   allow_failures:
     - php: nightly
     - env: STATIC_ANALYSIS=1
+    - env: MUTATION_TESTS=1
 
   include:
     - stage: Code Quality
