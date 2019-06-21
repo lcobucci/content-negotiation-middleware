@@ -214,7 +214,7 @@ final class ContentTypeMiddlewareTest extends TestCase
     {
         $middleware = $this->createMiddleware(
             true,
-            function () {
+            static function () {
                 return false;
             }
         );
@@ -279,7 +279,7 @@ final class ContentTypeMiddlewareTest extends TestCase
     private function configureCharset(bool $forceCharset = true): array
     {
         return array_map(
-            function (array $config) use ($forceCharset): array {
+            static function (array $config) use ($forceCharset): array {
                 return ['charset' => $forceCharset] + $config;
             },
             self::SUPPORTED_FORMATS

@@ -51,7 +51,6 @@ final class JsonTest extends TestCase
      * @covers ::format()
      *
      * @uses \Lcobucci\ContentNegotiation\Formatter\Json::__construct()
-     *
      */
     public function formatShouldReturnAJsonEncodedValue(): void
     {

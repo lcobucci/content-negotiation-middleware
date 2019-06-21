@@ -35,7 +35,7 @@ final class NaiveTemplateEngine implements Formatter
         $template = $attributes['template'] ?? '';
         assert(is_string($template));
 
-        $file = new SplFileObject(self::BASE_DIR . $template . '.' . self::EXTENSION);
+        $file    = new SplFileObject(self::BASE_DIR . $template . '.' . self::EXTENSION);
         $content = $file->fread($file->getSize());
         assert(is_string($content));
 
@@ -48,7 +48,7 @@ final class NaiveTemplateEngine implements Formatter
     private function render(string $template, array $data): string
     {
         $variables = array_map(
-            function (string $attribute): string {
+            static function (string $attribute): string {
                 return '{' . $attribute . '}';
             },
             array_keys($data)

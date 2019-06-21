@@ -24,9 +24,9 @@
         "psr/http-server-middleware": "^1.0"
     },
     "require-dev": {
-        "doctrine/coding-standard": "^4.0",
         "infection/infection": "^0.13",
         "jms/serializer": "^1.11",
+        "lcobucci/coding-standard": "^3.0",
         "league/plates": "^3.3",
         "middlewares/negotiation": "^1.0",
         "phpstan/phpstan": "^0.11",
