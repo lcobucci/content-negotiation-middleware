@@ -25,7 +25,6 @@ jobs:
     - php: 7.4snapshot
     - php: nightly
     - env: STATIC_ANALYSIS=1
-    - env: MUTATION_TESTS=1
 
   include:
     - stage: Code Quality
@@ -55,4 +54,4 @@ jobs:
         - mv ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini{.disabled,}
         - if [[ ! $(php -m | grep -si xdebug) ]]; then echo "xdebug required for mutation tests"; exit 1; fi
       script:
-        - ./vendor/bin/infection --threads=4 --min-msi=100 --min-covered-msi=100
+        - ./vendor/bin/infection --threads=$(nproc) --min-msi=97 --min-covered-msi=97
