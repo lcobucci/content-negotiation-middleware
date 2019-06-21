@@ -10,10 +10,11 @@ use const JSON_HEX_AMP;
 use const JSON_HEX_APOS;
 use const JSON_HEX_QUOT;
 use const JSON_HEX_TAG;
+use const JSON_THROW_ON_ERROR;
 use const JSON_UNESCAPED_SLASHES;
+use function assert;
+use function is_string;
 use function json_encode;
-use function json_last_error;
-use function json_last_error_msg;
 use function sprintf;
 
 final class Json implements Formatter
@@ -36,22 +37,16 @@ final class Json implements Formatter
     public function format($content, array $attributes = []): string
     {
         try {
-            $encoded = json_encode($content, $this->flags);
+            $content = json_encode($content, $this->flags | JSON_THROW_ON_ERROR);
+            assert(is_string($content));
+
+            return $content;
         } catch (Throwable $exception) {
             throw new ContentCouldNotBeFormatted(
-                'An exception was thrown during JSON formatting',
+                sprintf('An exception was thrown during JSON formatting: %s', $exception->getMessage()),
                 $exception->getCode(),
                 $exception
             );
         }
-
-        if ($encoded === false) {
-            throw new ContentCouldNotBeFormatted(
-                sprintf('Given data cannot be formatted as JSON: %s', json_last_error_msg()),
-                json_last_error()
-            );
-        }
-
-        return $encoded;
     }
 }
