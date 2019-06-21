@@ -43,8 +43,8 @@ final class TwigTest extends TestCase
         $formatter = new Twig($this->environment);
         $content   = $formatter->format(new PersonDto(1, 'Testing'), ['template' => 'person.twig']);
 
-        self::assertContains('<dd>1</dd>', $content);
-        self::assertContains('<dd>Testing</dd>', $content);
+        self::assertStringContainsString('<dd>1</dd>', $content);
+        self::assertStringContainsString('<dd>Testing</dd>', $content);
     }
 
     /**
@@ -59,8 +59,8 @@ final class TwigTest extends TestCase
         $formatter = new Twig($this->environment, 'fancy!');
         $content   = $formatter->format(new PersonDto(1, 'Testing'), ['fancy!' => 'person.twig']);
 
-        self::assertContains('<dd>1</dd>', $content);
-        self::assertContains('<dd>Testing</dd>', $content);
+        self::assertStringContainsString('<dd>1</dd>', $content);
+        self::assertStringContainsString('<dd>Testing</dd>', $content);
     }
 
     /**

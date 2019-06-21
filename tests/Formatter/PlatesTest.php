@@ -40,8 +40,8 @@ final class PlatesTest extends TestCase
         $formatter = new Plates($this->engine);
         $content   = $formatter->format(new PersonDto(1, 'Testing'), ['template' => 'person']);
 
-        self::assertContains('<dd>1</dd>', $content);
-        self::assertContains('<dd>Testing</dd>', $content);
+        self::assertStringContainsString('<dd>1</dd>', $content);
+        self::assertStringContainsString('<dd>Testing</dd>', $content);
     }
 
     /**
@@ -56,8 +56,8 @@ final class PlatesTest extends TestCase
         $formatter = new Plates($this->engine, 'fancy!');
         $content   = $formatter->format(new PersonDto(1, 'Testing'), ['fancy!' => 'person']);
 
-        self::assertContains('<dd>1</dd>', $content);
-        self::assertContains('<dd>Testing</dd>', $content);
+        self::assertStringContainsString('<dd>1</dd>', $content);
+        self::assertStringContainsString('<dd>Testing</dd>', $content);
     }
 
     /**

@@ -139,8 +139,8 @@ final class ContentTypeMiddlewareTest extends TestCase
 
         $body = (string) $response->getBody();
 
-        self::assertContains('<dd>1</dd>', $body);
-        self::assertContains('<dd>Testing</dd>', $body);
+        self::assertStringContainsString('<dd>1</dd>', $body);
+        self::assertStringContainsString('<dd>Testing</dd>', $body);
     }
 
     /**
