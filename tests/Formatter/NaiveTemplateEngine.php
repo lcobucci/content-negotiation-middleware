@@ -36,8 +36,10 @@ final class NaiveTemplateEngine implements Formatter
         assert(is_string($template));
 
         $file = new SplFileObject(self::BASE_DIR . $template . '.' . self::EXTENSION);
+        $content = $file->fread($file->getSize());
+        assert(is_string($content));
 
-        return $file->fread($file->getSize());
+        return $content;
     }
 
     /**

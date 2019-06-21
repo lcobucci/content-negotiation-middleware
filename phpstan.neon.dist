@@ -8,3 +8,7 @@ parameters:
     paths:
         - src
         - tests
+    ignoreErrors:
+        -
+            message: '#Variable method call on#'
+            path: tests/UnformattedResponseTest.php
