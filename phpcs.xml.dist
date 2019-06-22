@@ -10,23 +10,5 @@
     <file>src</file>
     <file>tests</file>
 
-    <rule ref="Doctrine">
-        <exclude name="SlevomatCodingStandard.Commenting.RequireOneLinePropertyDocComment" />
-    </rule>
-
-    <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes">
-        <properties>
-            <property name="newlinesCountBetweenOpenTagAndDeclare" value="1"/>
-            <property name="spacesCountAroundEqualsSign" value="0"/>
-            <property name="newlinesCountAfterDeclare" value="2"/>
-        </properties>
-    </rule>
-
-    <rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHintSpacing">
-        <properties>
-            <property name="spacesCountBeforeColon" value="0"/>
-        </properties>
-    </rule>
-
-    <rule ref="SlevomatCodingStandard.Commenting.DisallowOneLinePropertyDocComment" />
+    <rule ref="Lcobucci" />
 </ruleset>

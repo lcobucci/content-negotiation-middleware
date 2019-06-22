@@ -9,10 +9,6 @@ use Lcobucci\ContentNegotiation\Formatter\Json;
 use Lcobucci\ContentNegotiation\Tests\PersonDto;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
-use const JSON_HEX_AMP;
-use const JSON_HEX_APOS;
-use const JSON_HEX_QUOT;
-use const JSON_HEX_TAG;
 use const JSON_UNESCAPED_SLASHES;
 use function acos;
 
@@ -25,23 +21,29 @@ final class JsonTest extends TestCase
      * @test
      *
      * @covers ::__construct()
+     *
+     * @uses \Lcobucci\ContentNegotiation\Formatter\Json::format()
      */
     public function constructorShouldAllowTheConfigurationOfEncodingFlags(): void
     {
-        self::assertAttributeSame(JSON_UNESCAPED_SLASHES, 'flags', new Json(JSON_UNESCAPED_SLASHES));
+        self::assertSame(
+            '["<foo>","\'bar\'","\"baz\"","&blong&","\u00e9","http://"]',
+            (new Json(JSON_UNESCAPED_SLASHES))->format(['<foo>', "'bar'", '"baz"', '&blong&', "\xc3\xa9", 'http://'])
+        );
     }
 
     /**
      * @test
      *
      * @covers ::__construct()
+     *
+     * @uses \Lcobucci\ContentNegotiation\Formatter\Json::format()
      */
     public function constructorShouldUseDefaultFlagsWhenNothingWasSet(): void
     {
-        self::assertAttributeSame(
-            JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT | JSON_UNESCAPED_SLASHES,
-            'flags',
-            new Json()
+        self::assertSame(
+            '["\u003Cfoo\u003E","\u0027bar\u0027","\u0022baz\u0022","\u0026blong\u0026","\u00e9","http://"]',
+            $this->format(['<foo>', "'bar'", '"baz"', '&blong&', "\xc3\xa9", 'http://'])
         );
     }
 
@@ -51,7 +53,6 @@ final class JsonTest extends TestCase
      * @covers ::format()
      *
      * @uses \Lcobucci\ContentNegotiation\Formatter\Json::__construct()
-     *
      */
     public function formatShouldReturnAJsonEncodedValue(): void
     {

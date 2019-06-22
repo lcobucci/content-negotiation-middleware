@@ -57,7 +57,7 @@ final class ContentTypeMiddleware implements MiddlewareInterface
         return new self(
             new ContentType($formats),
             $formatters,
-            $streamFactory ?? function (): StreamInterface {
+            $streamFactory ?? static function (): StreamInterface {
                 return new Stream('php://temp', 'wb+');
             }
         );

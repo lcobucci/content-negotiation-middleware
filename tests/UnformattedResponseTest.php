@@ -33,14 +33,15 @@ final class UnformattedResponseTest extends TestCase
      * @covers ::withAttribute()
      *
      * @uses \Lcobucci\ContentNegotiation\UnformattedResponse::__construct()
+     * @uses \Lcobucci\ContentNegotiation\UnformattedResponse::getAttributes()
      */
     public function withAttributeShouldReturnANewInstanceWithTheAddedAttribute(): void
     {
         $response1 = new UnformattedResponse(new Response(), new PersonDto(1, 'Testing'));
         $response2 = $response1->withAttribute('test', 1);
 
-        self::assertAttributeSame([], 'attributes', $response1);
-        self::assertAttributeSame(['test' => 1], 'attributes', $response2);
+        self::assertSame([], $response1->getAttributes());
+        self::assertSame(['test' => 1], $response2->getAttributes());
     }
 
     /**
@@ -48,6 +49,8 @@ final class UnformattedResponseTest extends TestCase
      *
      * @covers ::__construct()
      * @covers ::withAttribute()
+     *
+     * @uses \Lcobucci\ContentNegotiation\UnformattedResponse::getAttributes()
      */
     public function withAttributeShouldOverrideExistingAttributes(): void
     {
@@ -57,7 +60,7 @@ final class UnformattedResponseTest extends TestCase
             ['test' => 1]
         );
 
-        self::assertAttributeSame(['test' => 2], 'attributes', $response->withAttribute('test', 2));
+        self::assertSame(['test' => 2], $response->withAttribute('test', 2)->getAttributes());
     }
 
     /**
