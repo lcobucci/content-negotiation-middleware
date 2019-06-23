@@ -70,6 +70,7 @@ declare(strict_types=1);
 use Lcobucci\ContentNegotiation\ContentTypeMiddleware;
 use Lcobucci\ContentNegotiation\Formatter\Json;
 use Lcobucci\ContentNegotiation\Formatter\StringCast;
+use Zend\Diactoros\StreamFactory;
 
 $middleware = ContentTypeMiddleware::fromRecommendedSettings(
     // First argument is the list of formats you want to support:
@@ -98,7 +99,10 @@ $middleware = ContentTypeMiddleware::fromRecommendedSettings(
     [
         'application/json' => new Json(),
         'text/html'        => new StringCast(),
-    ]
+    ],
+
+     // The last argument is any implementation for the StreamFactoryInterface (PSR-17)  
+    new StreamFactory()
 );
 ```
 
