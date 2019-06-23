@@ -53,4 +53,4 @@ jobs:
         - mv ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini{.disabled,}
         - if [[ ! $(php -m | grep -si xdebug) ]]; then echo "xdebug required for mutation tests"; exit 1; fi
       script:
-        - ./vendor/bin/infection --threads=$(nproc) --min-msi=97 --min-covered-msi=97
+        - ./vendor/bin/infection --threads=$(nproc) --min-msi=100 --min-covered-msi=100

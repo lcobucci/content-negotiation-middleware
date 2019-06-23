@@ -22,6 +22,7 @@
         "php": "^7.3",
         "ext-json": "^1.7",
         "fig/http-message-util": "^1.1",
+        "psr/http-factory": "^1.0",
         "psr/http-server-middleware": "^1.0"
     },
     "require-dev": {

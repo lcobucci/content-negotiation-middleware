@@ -7,11 +7,9 @@ use Fig\Http\Message\StatusCodeInterface;
 use Middlewares\ContentType;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Message\StreamInterface;
+use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Zend\Diactoros\Stream;
-use function assert;
 use function strpos;
 use function substr;
 
@@ -23,7 +21,7 @@ final class ContentTypeMiddleware implements MiddlewareInterface
     private $negotiator;
 
     /**
-     * @var callable
+     * @var StreamFactoryInterface
      */
     private $streamFactory;
 
@@ -38,7 +36,7 @@ final class ContentTypeMiddleware implements MiddlewareInterface
     public function __construct(
         MiddlewareInterface $negotiator,
         array $formatters,
-        callable $streamFactory
+        StreamFactoryInterface $streamFactory
     ) {
         $this->negotiator    = $negotiator;
         $this->formatters    = $formatters;
@@ -52,14 +50,12 @@ final class ContentTypeMiddleware implements MiddlewareInterface
     public static function fromRecommendedSettings(
         array $formats,
         array $formatters,
-        ?callable $streamFactory = null
+        StreamFactoryInterface $streamFactory
     ): self {
         return new self(
             new ContentType($formats),
             $formatters,
-            $streamFactory ?? static function (): StreamInterface {
-                return new Stream('php://temp', 'wb+');
-            }
+            $streamFactory
         );
     }
 
@@ -98,18 +94,15 @@ final class ContentTypeMiddleware implements MiddlewareInterface
      */
     private function formatResponse(UnformattedResponse $response, ?Formatter $formatter): ResponseInterface
     {
-        $body = ($this->streamFactory)();
-        assert($body instanceof StreamInterface);
-
-        $response = $response->withBody($body);
-
         if ($formatter === null) {
-            return $response->withStatus(StatusCodeInterface::STATUS_NOT_ACCEPTABLE);
+            return $response->withBody($this->streamFactory->createStream())
+                            ->withStatus(StatusCodeInterface::STATUS_NOT_ACCEPTABLE);
         }
 
-        $body->write($formatter->format($response->getUnformattedContent(), $response->getAttributes()));
-        $body->rewind();
-
-        return $response;
+        return $response->withBody(
+            $this->streamFactory->createStream(
+                $formatter->format($response->getUnformattedContent(), $response->getAttributes())
+            )
+        );
     }
 }
