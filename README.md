@@ -5,7 +5,7 @@
 [![Unstable Version](https://img.shields.io/packagist/vpre/lcobucci/content-negotiation-middleware.svg?style=flat-square)](https://packagist.org/packages/lcobucci/content-negotiation-middleware)
 
 ![Branch master](https://img.shields.io/badge/branch-master-brightgreen.svg?style=flat-square)
-[![Build Status](https://img.shields.io/travis/lcobucci/content-negotiation-middleware/master.svg?style=flat-square)](http://travis-ci.org/#!/lcobucci/content-negotiation-middleware)
+[![Build Status](https://img.shields.io/travis/lcobucci/content-negotiation-middleware/master.svg?style=flat-square)](http://travis-ci.org/lcobucci/content-negotiation-middleware)
 [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/lcobucci/content-negotiation-middleware/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/lcobucci/content-negotiation-middleware/?branch=master)
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/lcobucci/content-negotiation-middleware/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/lcobucci/content-negotiation-middleware/?branch=master)
 
