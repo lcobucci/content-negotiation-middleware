@@ -27,7 +27,7 @@
     },
     "require-dev": {
         "infection/infection": "^0.15",
-        "jms/serializer": "^3.3",
+        "jms/serializer": "^3.4",
         "lcobucci/coding-standard": "^3.1",
         "league/plates": "^3.3",
         "middlewares/negotiation": "^1.1",
