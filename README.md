@@ -75,11 +75,9 @@ use Zend\Diactoros\StreamFactory;
 $middleware = ContentTypeMiddleware::fromRecommendedSettings(
     // First argument is the list of formats you want to support:
     [
-        'json' => [
-            'extension' => ['json'],
-            'mime-type' => ['application/json', 'text/json', 'application/x-json'],
-            'charset' => true,
-        ],
+        'json',
+        // You may also specify the full configuration of the format.
+        // That's handy if you need to add extensions or mime-types:
         'html' => [
             'extension' => ['html', 'htm', 'php'],
             'mime-type' => ['text/html', 'application/xhtml+xml'],
