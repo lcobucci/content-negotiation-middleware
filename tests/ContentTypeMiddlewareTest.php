@@ -4,6 +4,10 @@ declare(strict_types=1);
 namespace Lcobucci\ContentNegotiation\Tests;
 
 use Fig\Http\Message\StatusCodeInterface;
+use Laminas\Diactoros\Response;
+use Laminas\Diactoros\Response\EmptyResponse;
+use Laminas\Diactoros\ServerRequest;
+use Laminas\Diactoros\StreamFactory;
 use Lcobucci\ContentNegotiation\ContentTypeMiddleware;
 use Lcobucci\ContentNegotiation\Formatter;
 use Lcobucci\ContentNegotiation\Tests\Formatter\NaiveTemplateEngine;
@@ -12,10 +16,6 @@ use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Zend\Diactoros\Response;
-use Zend\Diactoros\Response\EmptyResponse;
-use Zend\Diactoros\ServerRequest;
-use Zend\Diactoros\StreamFactory;
 use function array_map;
 
 /**
