@@ -8,10 +8,7 @@ use Psr\Http\Message\StreamInterface;
 
 final class UnformattedResponse implements ResponseInterface
 {
-    /**
-     * @var ResponseInterface
-     */
-    private $decoratedResponse;
+    private ResponseInterface $decoratedResponse;
 
     /**
      * @var mixed
@@ -19,13 +16,13 @@ final class UnformattedResponse implements ResponseInterface
     private $unformattedContent;
 
     /**
-     * @var mixed[]
+     * @var array<string, mixed>
      */
-    private $attributes;
+    private array $attributes;
 
     /**
-     * @param mixed   $unformattedContent
-     * @param mixed[] $attributes
+     * @param mixed                $unformattedContent
+     * @param array<string, mixed> $attributes
      */
     public function __construct(
         ResponseInterface $decoratedResponse,
@@ -45,10 +42,7 @@ final class UnformattedResponse implements ResponseInterface
         return $this->unformattedContent;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getProtocolVersion()
+    public function getProtocolVersion(): string
     {
         return $this->decoratedResponse->getProtocolVersion();
     }
@@ -68,7 +62,7 @@ final class UnformattedResponse implements ResponseInterface
     /**
      * {@inheritdoc}
      */
-    public function getHeaders()
+    public function getHeaders(): array
     {
         return $this->decoratedResponse->getHeaders();
     }
@@ -76,7 +70,7 @@ final class UnformattedResponse implements ResponseInterface
     /**
      * {@inheritdoc}
      */
-    public function hasHeader($name)
+    public function hasHeader($name): bool
     {
         return $this->decoratedResponse->hasHeader($name);
     }
@@ -92,7 +86,7 @@ final class UnformattedResponse implements ResponseInterface
     /**
      * {@inheritdoc}
      */
-    public function getHeaderLine($name)
+    public function getHeaderLine($name): string
     {
         return $this->decoratedResponse->getHeaderLine($name);
     }
@@ -133,10 +127,7 @@ final class UnformattedResponse implements ResponseInterface
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getBody()
+    public function getBody(): StreamInterface
     {
         return $this->decoratedResponse->getBody();
     }
@@ -153,10 +144,7 @@ final class UnformattedResponse implements ResponseInterface
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getStatusCode()
+    public function getStatusCode(): int
     {
         return $this->decoratedResponse->getStatusCode();
     }
@@ -173,10 +161,7 @@ final class UnformattedResponse implements ResponseInterface
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getReasonPhrase()
+    public function getReasonPhrase(): string
     {
         return $this->decoratedResponse->getReasonPhrase();
     }
@@ -198,7 +183,7 @@ final class UnformattedResponse implements ResponseInterface
     /**
      * Retrieve the configured attributes
      *
-     * @return mixed[]
+     * @return array<string, mixed>
      */
     public function getAttributes(): array
     {

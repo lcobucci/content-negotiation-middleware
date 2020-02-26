@@ -184,19 +184,13 @@ final class ContentTypeMiddlewareTest extends TestCase
     {
         return new class($response) implements RequestHandlerInterface
         {
-            /**
-             * @var ResponseInterface
-             */
-            private $response;
+            private ResponseInterface $response;
 
             public function __construct(ResponseInterface $response)
             {
                 $this->response = $response;
             }
 
-            /**
-             * {@inheritdoc}
-             */
             public function handle(ServerRequestInterface $request): ResponseInterface
             {
                 return $this->response;

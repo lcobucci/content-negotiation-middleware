@@ -5,15 +5,9 @@ namespace Lcobucci\ContentNegotiation\Tests;
 
 final class PersonDto
 {
-    /**
-     * @var int
-     */
-    public $id;
+    public int $id;
 
-    /**
-     * @var string
-     */
-    public $name;
+    public string $name;
 
     public function __construct(int $id, string $name)
     {

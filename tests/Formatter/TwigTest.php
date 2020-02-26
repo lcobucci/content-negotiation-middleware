@@ -16,10 +16,7 @@ use function dirname;
  */
 final class TwigTest extends TestCase
 {
-    /**
-     * @var Twig_Environment
-     */
-    private $environment;
+    private Twig_Environment $environment;
 
     /**
      * @before

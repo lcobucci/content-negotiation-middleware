@@ -6,23 +6,20 @@ namespace Lcobucci\ContentNegotiation\Formatter;
 use Lcobucci\ContentNegotiation\ContentCouldNotBeFormatted;
 use Lcobucci\ContentNegotiation\Formatter;
 use Throwable;
+use function json_encode;
+use function sprintf;
 use const JSON_HEX_AMP;
 use const JSON_HEX_APOS;
 use const JSON_HEX_QUOT;
 use const JSON_HEX_TAG;
 use const JSON_THROW_ON_ERROR;
 use const JSON_UNESCAPED_SLASHES;
-use function json_encode;
-use function sprintf;
 
 final class Json implements Formatter
 {
     private const DEFAULT_FLAGS = JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT | JSON_UNESCAPED_SLASHES;
 
-    /**
-     * @var int
-     */
-    private $flags;
+    private int $flags;
 
     public function __construct(int $flags = self::DEFAULT_FLAGS)
     {

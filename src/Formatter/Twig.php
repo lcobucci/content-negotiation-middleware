@@ -12,15 +12,8 @@ final class Twig implements Formatter
 {
     private const DEFAULT_ATTRIBUTE = 'template';
 
-    /**
-     * @var Twig_Environment
-     */
-    private $environment;
-
-    /**
-     * @var string
-     */
-    private $attributeName;
+    private Twig_Environment $environment;
+    private string $attributeName;
 
     public function __construct(
         Twig_Environment $environment,

@@ -12,15 +12,8 @@ final class Plates implements Formatter
 {
     private const DEFAULT_ATTRIBUTE = 'template';
 
-    /**
-     * @var Engine
-     */
-    private $engine;
-
-    /**
-     * @var string
-     */
-    private $attributeName;
+    private Engine $engine;
+    private string $attributeName;
 
     public function __construct(Engine $engine, string $attributeName = self::DEFAULT_ATTRIBUTE)
     {

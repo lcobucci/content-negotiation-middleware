@@ -29,7 +29,7 @@
         "infection/infection": "^0.15",
         "jms/serializer": "^3.5",
         "laminas/laminas-diactoros": "^2.2",
-        "lcobucci/coding-standard": "^3.1",
+        "lcobucci/coding-standard": "^4.0",
         "league/plates": "^3.3",
         "middlewares/negotiation": "^1.1",
         "phpstan/extension-installer": "^1.0",

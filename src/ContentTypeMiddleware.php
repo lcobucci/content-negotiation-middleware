@@ -15,20 +15,13 @@ use function substr;
 
 final class ContentTypeMiddleware implements MiddlewareInterface
 {
-    /**
-     * @var MiddlewareInterface
-     */
-    private $negotiator;
-
-    /**
-     * @var StreamFactoryInterface
-     */
-    private $streamFactory;
+    private MiddlewareInterface $negotiator;
+    private StreamFactoryInterface $streamFactory;
 
     /**
      * @var Formatter[]
      */
-    private $formatters;
+    private array $formatters;
 
     /**
      * @param Formatter[] $formatters
