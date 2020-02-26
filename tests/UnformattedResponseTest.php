@@ -6,7 +6,7 @@ namespace Lcobucci\ContentNegotiation\Tests;
 use Laminas\Diactoros\Response;
 use Laminas\Diactoros\Stream;
 use Lcobucci\ContentNegotiation\UnformattedResponse;
-use PHPStan\Testing\TestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @coversDefaultClass \Lcobucci\ContentNegotiation\UnformattedResponse
