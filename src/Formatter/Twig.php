@@ -6,17 +6,17 @@ namespace Lcobucci\ContentNegotiation\Formatter;
 use Lcobucci\ContentNegotiation\ContentCouldNotBeFormatted;
 use Lcobucci\ContentNegotiation\Formatter;
 use Throwable;
-use Twig_Environment;
+use Twig\Environment;
 
 final class Twig implements Formatter
 {
     private const DEFAULT_ATTRIBUTE = 'template';
 
-    private Twig_Environment $environment;
+    private Environment $environment;
     private string $attributeName;
 
     public function __construct(
-        Twig_Environment $environment,
+        Environment $environment,
         string $attributeName = self::DEFAULT_ATTRIBUTE
     ) {
         $this->environment   = $environment;

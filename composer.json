@@ -39,7 +39,7 @@
         "phpstan/phpstan-strict-rules": "^0.12",
         "phpunit/phpunit": "^9.0",
         "squizlabs/php_codesniffer": "^3.5",
-        "twig/twig": "^2.12"
+        "twig/twig": "^3.0"
     },
     "suggest": {
         "jms/serializer": "For content formatting using a more flexible serializer",
