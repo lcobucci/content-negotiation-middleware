@@ -13,3 +13,5 @@ parameters:
         -
             message: '#Variable method call on#'
             path: tests/UnformattedResponseTest.php
+
+        - '#static\(Lcobucci\\ContentNegotiation\\UnformattedResponse\) but returns Lcobucci\\ContentNegotiation\\UnformattedResponse#'
