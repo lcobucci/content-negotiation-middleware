@@ -7,8 +7,8 @@ use Lcobucci\ContentNegotiation\ContentCouldNotBeFormatted;
 use Lcobucci\ContentNegotiation\Formatter\Twig;
 use Lcobucci\ContentNegotiation\Tests\PersonDto;
 use PHPUnit\Framework\TestCase;
-use Twig_Environment;
-use Twig_Loader_Filesystem;
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
 use function dirname;
 
 /**
@@ -16,18 +16,15 @@ use function dirname;
  */
 final class TwigTest extends TestCase
 {
-    /**
-     * @var Twig_Environment
-     */
-    private $environment;
+    private Environment $environment;
 
     /**
      * @before
      */
     public function configureEngine(): void
     {
-        $this->environment = new Twig_Environment(
-            new Twig_Loader_Filesystem('templates/twig', dirname(__DIR__, 2) . '/')
+        $this->environment = new Environment(
+            new FilesystemLoader('templates/twig', dirname(__DIR__, 2) . '/')
         );
     }
 

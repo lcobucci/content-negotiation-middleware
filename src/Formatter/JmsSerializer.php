@@ -11,15 +11,8 @@ use function sprintf;
 
 final class JmsSerializer implements Formatter
 {
-    /**
-     * @var SerializerInterface
-     */
-    private $serializer;
-
-    /**
-     * @var string
-     */
-    private $format;
+    private SerializerInterface $serializer;
+    private string $format;
 
     public function __construct(SerializerInterface $serializer, string $format)
     {

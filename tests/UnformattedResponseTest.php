@@ -3,10 +3,10 @@ declare(strict_types=1);
 
 namespace Lcobucci\ContentNegotiation\Tests;
 
+use Laminas\Diactoros\Response;
+use Laminas\Diactoros\Stream;
 use Lcobucci\ContentNegotiation\UnformattedResponse;
-use PHPStan\Testing\TestCase;
-use Zend\Diactoros\Response;
-use Zend\Diactoros\Stream;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @coversDefaultClass \Lcobucci\ContentNegotiation\UnformattedResponse

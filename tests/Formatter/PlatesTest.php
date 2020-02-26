@@ -15,10 +15,7 @@ use function dirname;
  */
 final class PlatesTest extends TestCase
 {
-    /**
-     * @var Engine
-     */
-    private $engine;
+    private Engine $engine;
 
     /**
      * @before

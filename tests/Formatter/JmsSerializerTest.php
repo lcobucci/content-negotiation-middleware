@@ -18,7 +18,7 @@ final class JmsSerializerTest extends TestCase
     /**
      * @var SerializerInterface|MockObject
      */
-    private $serializer;
+    private SerializerInterface $serializer;
 
     /**
      * @before
