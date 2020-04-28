@@ -28,7 +28,7 @@
     "require-dev": {
         "infection/infection": "^0.16",
         "jms/serializer": "^3.6",
-        "laminas/laminas-diactoros": "^2.2",
+        "laminas/laminas-diactoros": "^2.3",
         "lcobucci/coding-standard": "^4.0",
         "league/plates": "^3.3",
         "middlewares/negotiation": "^2.0",
