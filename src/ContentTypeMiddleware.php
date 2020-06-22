@@ -85,17 +85,25 @@ final class ContentTypeMiddleware implements MiddlewareInterface
     /**
      * @throws ContentCouldNotBeFormatted
      */
-    private function formatResponse(UnformattedResponse $response, ?Formatter $formatter): ResponseInterface
+    private function formatResponse(UnformattedResponse $response, $formatter): ResponseInterface
     {
         if ($formatter === null) {
             return $response->withBody($this->streamFactory->createStream())
                             ->withStatus(StatusCodeInterface::STATUS_NOT_ACCEPTABLE);
         }
 
-        return $response->withBody(
-            $this->streamFactory->createStream(
-                $formatter->format($response->getUnformattedContent(), $response->getAttributes())
-            )
-        );
+        if ($formatter instanceof RawFormatter) {
+            return $formatter->format($response);
+        }
+
+        if ($formatter instanceof Formatter) {
+            return $response->withBody(
+                $this->streamFactory->createStream(
+                    $formatter->format($response->getUnformattedContent(), $response->getAttributes())
+                )
+            );
+        }
+
+        throw new ContentCouldNotBeFormatted('bad formatter');
     }
 }
