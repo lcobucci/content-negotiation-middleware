@@ -5,11 +5,10 @@ namespace Lcobucci\ContentNegotiation\Formatter;
 
 use JMS\Serializer\SerializerInterface;
 use Lcobucci\ContentNegotiation\ContentCouldNotBeFormatted;
-use Lcobucci\ContentNegotiation\Formatter;
 use Throwable;
 use function sprintf;
 
-final class JmsSerializer implements Formatter
+final class JmsSerializer extends ContentOnly
 {
     private SerializerInterface $serializer;
     private string $format;
@@ -23,7 +22,7 @@ final class JmsSerializer implements Formatter
     /**
      * {@inheritdoc}
      */
-    public function format($content, array $attributes = []): string
+    public function formatContent($content, array $attributes = []): string
     {
         try {
             return $this->serializer->serialize($content, $this->format);

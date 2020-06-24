@@ -29,13 +29,13 @@ final class PlatesTest extends TestCase
      * @test
      *
      * @covers ::__construct()
-     * @covers ::format()
+     * @covers ::formatContent()
      * @covers ::render()
      */
     public function formatShouldReturnContentFormattedByPlates(): void
     {
         $formatter = new Plates($this->engine);
-        $content   = $formatter->format(new PersonDto(1, 'Testing'), ['template' => 'person']);
+        $content   = $formatter->formatContent(new PersonDto(1, 'Testing'), ['template' => 'person']);
 
         self::assertStringContainsString('<dd>1</dd>', $content);
         self::assertStringContainsString('<dd>Testing</dd>', $content);
@@ -45,13 +45,13 @@ final class PlatesTest extends TestCase
      * @test
      *
      * @covers ::__construct()
-     * @covers ::format()
+     * @covers ::formatContent()
      * @covers ::render()
      */
     public function formatShouldReadTemplateNameFromCustomAttribute(): void
     {
         $formatter = new Plates($this->engine, 'fancy!');
-        $content   = $formatter->format(new PersonDto(1, 'Testing'), ['fancy!' => 'person']);
+        $content   = $formatter->formatContent(new PersonDto(1, 'Testing'), ['fancy!' => 'person']);
 
         self::assertStringContainsString('<dd>1</dd>', $content);
         self::assertStringContainsString('<dd>Testing</dd>', $content);
@@ -61,7 +61,7 @@ final class PlatesTest extends TestCase
      * @test
      *
      * @covers ::__construct()
-     * @covers ::format()
+     * @covers ::formatContent()
      * @covers ::render()
      */
     public function formatShouldConvertAnyPlatesException(): void
@@ -71,6 +71,6 @@ final class PlatesTest extends TestCase
         $this->expectException(ContentCouldNotBeFormatted::class);
         $this->expectExceptionMessage('An error occurred while formatting using plates');
 
-        $formatter->format(new PersonDto(1, 'Testing'), ['template' => 'no-template-at-all']);
+        $formatter->formatContent(new PersonDto(1, 'Testing'), ['template' => 'no-template-at-all']);
     }
 }

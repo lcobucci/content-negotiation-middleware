@@ -22,13 +22,14 @@ final class JsonTest extends TestCase
      *
      * @covers ::__construct()
      *
-     * @uses \Lcobucci\ContentNegotiation\Formatter\Json::format()
+     * @uses \Lcobucci\ContentNegotiation\Formatter\Json::formatContent()
      */
     public function constructorShouldAllowTheConfigurationOfEncodingFlags(): void
     {
         self::assertSame(
             '["<foo>","\'bar\'","\"baz\"","&blong&","\u00e9","http://"]',
-            (new Json(JSON_UNESCAPED_SLASHES))->format(['<foo>', "'bar'", '"baz"', '&blong&', "\xc3\xa9", 'http://'])
+            (new Json(JSON_UNESCAPED_SLASHES))
+                ->formatContent(['<foo>', "'bar'", '"baz"', '&blong&', "\xc3\xa9", 'http://'])
         );
     }
 
@@ -37,20 +38,20 @@ final class JsonTest extends TestCase
      *
      * @covers ::__construct()
      *
-     * @uses \Lcobucci\ContentNegotiation\Formatter\Json::format()
+     * @uses \Lcobucci\ContentNegotiation\Formatter\Json::formatContent()
      */
     public function constructorShouldUseDefaultFlagsWhenNothingWasSet(): void
     {
         self::assertSame(
             '["\u003Cfoo\u003E","\u0027bar\u0027","\u0022baz\u0022","\u0026blong\u0026","\u00e9","http://"]',
-            $this->format(['<foo>', "'bar'", '"baz"', '&blong&', "\xc3\xa9", 'http://'])
+            $this->formatContent(['<foo>', "'bar'", '"baz"', '&blong&', "\xc3\xa9", 'http://'])
         );
     }
 
     /**
      * @test
      *
-     * @covers ::format()
+     * @covers ::formatContent()
      *
      * @uses \Lcobucci\ContentNegotiation\Formatter\Json::__construct()
      */
@@ -58,14 +59,14 @@ final class JsonTest extends TestCase
     {
         self::assertJsonStringEqualsJsonString(
             '{"id":1,"name":"Test"}',
-            $this->format(new PersonDto(1, 'Test'))
+            $this->formatContent(new PersonDto(1, 'Test'))
         );
     }
 
     /**
      * @test
      *
-     * @covers ::format()
+     * @covers ::formatContent()
      *
      * @uses \Lcobucci\ContentNegotiation\Formatter\Json::__construct()
      */
@@ -74,13 +75,13 @@ final class JsonTest extends TestCase
         $this->expectException(ContentCouldNotBeFormatted::class);
         $this->expectExceptionMessage('Inf and NaN cannot be JSON encoded');
 
-        $this->format(acos(8));
+        $this->formatContent(acos(8));
     }
 
     /**
      * @test
      *
-     * @covers ::format()
+     * @covers ::formatContent()
      *
      * @uses \Lcobucci\ContentNegotiation\Formatter\Json::__construct()
      */
@@ -89,7 +90,7 @@ final class JsonTest extends TestCase
         $this->expectException(ContentCouldNotBeFormatted::class);
         $this->expectExceptionMessage('An exception was thrown during JSON formatting');
 
-        $this->format(
+        $this->formatContent(
             new class implements JsonSerializable
             {
                 public function jsonSerialize(): void
@@ -103,10 +104,10 @@ final class JsonTest extends TestCase
     /**
      * @param mixed $content
      */
-    private function format($content): string
+    private function formatContent($content): string
     {
         $formatter = new Json();
 
-        return $formatter->format($content);
+        return $formatter->formatContent($content);
     }
 }

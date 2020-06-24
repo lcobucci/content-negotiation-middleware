@@ -46,6 +46,7 @@ final class ContentTypeMiddlewareTest extends TestCase
      * @covers ::process()
      *
      * @uses \Lcobucci\ContentNegotiation\Formatter\Json
+     * @uses \Lcobucci\ContentNegotiation\Formatter\ContentOnly
      */
     public function processShouldReturnFormattedResponseDirectly(): void
     {
@@ -64,10 +65,10 @@ final class ContentTypeMiddlewareTest extends TestCase
      * @covers ::fromRecommendedSettings()
      * @covers ::process()
      * @covers ::extractContentType()
-     * @covers ::formatResponse()
      *
      * @uses \Lcobucci\ContentNegotiation\UnformattedResponse
      * @uses \Lcobucci\ContentNegotiation\Formatter\Json
+     * @uses \Lcobucci\ContentNegotiation\Formatter\NotAcceptable
      */
     public function processShouldReturnAResponseWithErrorWhenFormatterWasNotFound(): void
     {
@@ -90,9 +91,9 @@ final class ContentTypeMiddlewareTest extends TestCase
      * @covers ::fromRecommendedSettings()
      * @covers ::process()
      * @covers ::extractContentType()
-     * @covers ::formatResponse()
      *
      * @uses \Lcobucci\ContentNegotiation\UnformattedResponse
+     * @uses \Lcobucci\ContentNegotiation\Formatter\ContentOnly
      * @uses \Lcobucci\ContentNegotiation\Formatter\Json
      */
     public function processShouldReturnAResponseWithFormattedContent(): void
@@ -117,9 +118,9 @@ final class ContentTypeMiddlewareTest extends TestCase
      * @covers ::fromRecommendedSettings()
      * @covers ::process()
      * @covers ::extractContentType()
-     * @covers ::formatResponse()
      *
      * @uses \Lcobucci\ContentNegotiation\UnformattedResponse
+     * @uses \Lcobucci\ContentNegotiation\Formatter\ContentOnly
      * @uses \Lcobucci\ContentNegotiation\Formatter\Json
      */
     public function processShouldPassAttributesToTheFormatterProperly(): void
@@ -148,9 +149,9 @@ final class ContentTypeMiddlewareTest extends TestCase
      * @covers ::fromRecommendedSettings()
      * @covers ::process()
      * @covers ::extractContentType()
-     * @covers ::formatResponse()
      *
      * @uses \Lcobucci\ContentNegotiation\UnformattedResponse
+     * @uses \Lcobucci\ContentNegotiation\Formatter\ContentOnly
      * @uses \Lcobucci\ContentNegotiation\Formatter\Json
      */
     public function processShouldReturnAResponseWithFormattedContentEvenWithoutForcingTheCharset(): void

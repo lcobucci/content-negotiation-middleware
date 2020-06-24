@@ -167,15 +167,17 @@ declare(strict_types=1);
 namespace Me\MyApp;
 
 use Lcobucci\ContentNegotiation\Formatter;
+use Lcobucci\ContentNegotiation\UnformattedResponse;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\StreamFactoryInterface;
 
 final class MyFancyFormatter implements Formatter
 {
-    public function format($content, array $attributes = []): string
+    public function format(UnformattedResponse $response, StreamFactoryInterface $streamFactory): ResponseInterface
     {
-        // Performs all the magic with $content and creates $result with a
-        // `string` containing the formatted data.
+        $content = ''; // Do some fancy formatting of $response->getUnformattedContent() and put into $content
 
-        return $result;
+        return $response->withBody($streamFactory->createStream($content));
     }
 }
 ```

@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace Lcobucci\ContentNegotiation\Formatter;
 
 use Lcobucci\ContentNegotiation\ContentCouldNotBeFormatted;
-use Lcobucci\ContentNegotiation\Formatter;
 use Throwable;
 use function json_encode;
 use function sprintf;
@@ -15,7 +14,7 @@ use const JSON_HEX_TAG;
 use const JSON_THROW_ON_ERROR;
 use const JSON_UNESCAPED_SLASHES;
 
-final class Json implements Formatter
+final class Json extends ContentOnly
 {
     private const DEFAULT_FLAGS = JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT | JSON_UNESCAPED_SLASHES;
 
@@ -29,7 +28,7 @@ final class Json implements Formatter
     /**
      * {@inheritdoc}
      */
-    public function format($content, array $attributes = []): string
+    public function formatContent($content, array $attributes = []): string
     {
         try {
             return json_encode($content, $this->flags | JSON_THROW_ON_ERROR);

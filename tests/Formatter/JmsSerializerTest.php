@@ -32,7 +32,7 @@ final class JmsSerializerTest extends TestCase
      * @test
      *
      * @covers ::__construct()
-     * @covers ::format()
+     * @covers ::formatContent()
      */
     public function formatShouldSimplyForwardCallToSerializer(): void
     {
@@ -45,14 +45,14 @@ final class JmsSerializerTest extends TestCase
 
         $formatter = new JmsSerializer($this->serializer, 'json');
 
-        self::assertSame('{"a":"test"}', $formatter->format($content));
+        self::assertSame('{"a":"test"}', $formatter->formatContent($content));
     }
 
     /**
      * @test
      *
      * @covers ::__construct()
-     * @covers ::format()
+     * @covers ::formatContent()
      */
     public function formatShouldConvertAnyRaisedException(): void
     {
@@ -62,6 +62,6 @@ final class JmsSerializerTest extends TestCase
                          ->willThrowException(new RuntimeException());
 
         $formatter = new JmsSerializer($this->serializer, 'json');
-        $formatter->format(['a' => 'test']);
+        $formatter->formatContent(['a' => 'test']);
     }
 }

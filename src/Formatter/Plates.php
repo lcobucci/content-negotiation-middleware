@@ -4,11 +4,10 @@ declare(strict_types=1);
 namespace Lcobucci\ContentNegotiation\Formatter;
 
 use Lcobucci\ContentNegotiation\ContentCouldNotBeFormatted;
-use Lcobucci\ContentNegotiation\Formatter;
 use League\Plates\Engine;
 use Throwable;
 
-final class Plates implements Formatter
+final class Plates extends ContentOnly
 {
     private const DEFAULT_ATTRIBUTE = 'template';
 
@@ -24,7 +23,7 @@ final class Plates implements Formatter
     /**
      * {@inheritdoc}
      */
-    public function format($content, array $attributes = []): string
+    public function formatContent($content, array $attributes = []): string
     {
         try {
             return $this->render($content, $attributes);

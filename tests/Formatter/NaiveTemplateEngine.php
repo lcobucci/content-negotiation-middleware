@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Lcobucci\ContentNegotiation\Tests\Formatter;
 
-use Lcobucci\ContentNegotiation\Formatter;
+use Lcobucci\ContentNegotiation\Formatter\ContentOnly;
 use SplFileObject;
 use function array_keys;
 use function array_map;
@@ -12,7 +12,7 @@ use function is_string;
 use function str_replace;
 use function trim;
 
-final class NaiveTemplateEngine implements Formatter
+final class NaiveTemplateEngine extends ContentOnly
 {
     private const BASE_DIR  = __DIR__ . '/../../templates/naive/';
     private const EXTENSION = 'html';
@@ -20,7 +20,7 @@ final class NaiveTemplateEngine implements Formatter
     /**
      * {@inheritdoc}
      */
-    public function format($content, array $attributes = []): string
+    public function formatContent($content, array $attributes = []): string
     {
         $template = $this->getTemplateContent($attributes);
 
