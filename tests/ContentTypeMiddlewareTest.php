@@ -16,6 +16,7 @@ use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+
 use function array_map;
 
 /**
@@ -183,7 +184,7 @@ final class ContentTypeMiddlewareTest extends TestCase
 
     private function createRequestHandler(ResponseInterface $response): RequestHandlerInterface
     {
-        return new class($response) implements RequestHandlerInterface
+        return new class ($response) implements RequestHandlerInterface
         {
             private ResponseInterface $response;
 

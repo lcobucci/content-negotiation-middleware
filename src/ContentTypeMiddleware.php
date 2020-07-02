@@ -10,6 +10,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+
 use function strpos;
 use function substr;
 
@@ -18,9 +19,7 @@ final class ContentTypeMiddleware implements MiddlewareInterface
     private MiddlewareInterface $negotiator;
     private StreamFactoryInterface $streamFactory;
 
-    /**
-     * @var Formatter[]
-     */
+    /** @var Formatter[] */
     private array $formatters;
 
     /**

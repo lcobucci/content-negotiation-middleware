@@ -8,8 +8,6 @@ use Psr\Http\Message\StreamFactoryInterface;
 
 interface Formatter
 {
-    /**
-     * @throws ContentCouldNotBeFormatted
-     */
+    /** @throws ContentCouldNotBeFormatted */
     public function format(UnformattedResponse $response, StreamFactoryInterface $streamFactory): ResponseInterface;
 }

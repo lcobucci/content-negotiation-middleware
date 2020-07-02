@@ -5,8 +5,10 @@ namespace Lcobucci\ContentNegotiation\Formatter;
 
 use Lcobucci\ContentNegotiation\ContentCouldNotBeFormatted;
 use Throwable;
+
 use function json_encode;
 use function sprintf;
+
 use const JSON_HEX_AMP;
 use const JSON_HEX_APOS;
 use const JSON_HEX_QUOT;
@@ -25,9 +27,7 @@ final class Json extends ContentOnly
         $this->flags = $flags;
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function formatContent($content, array $attributes = []): string
     {
         try {

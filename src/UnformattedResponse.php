@@ -10,14 +10,10 @@ final class UnformattedResponse implements ResponseInterface
 {
     private ResponseInterface $decoratedResponse;
 
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     private $unformattedContent;
 
-    /**
-     * @var array<string, mixed>
-     */
+    /** @var array<string, mixed> */
     private array $attributes;
 
     /**
@@ -34,9 +30,7 @@ final class UnformattedResponse implements ResponseInterface
         $this->attributes         = $attributes;
     }
 
-    /**
-     * @return mixed
-     */
+    /** @return mixed */
     public function getUnformattedContent()
     {
         return $this->unformattedContent;
@@ -47,9 +41,7 @@ final class UnformattedResponse implements ResponseInterface
         return $this->decoratedResponse->getProtocolVersion();
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function withProtocolVersion($version)
     {
         return new self(
@@ -59,41 +51,31 @@ final class UnformattedResponse implements ResponseInterface
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function getHeaders(): array
     {
         return $this->decoratedResponse->getHeaders();
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function hasHeader($name): bool
     {
         return $this->decoratedResponse->hasHeader($name);
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function getHeader($name)
     {
         return $this->decoratedResponse->getHeader($name);
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function getHeaderLine($name): string
     {
         return $this->decoratedResponse->getHeaderLine($name);
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function withHeader($name, $value)
     {
         return new self(
@@ -103,9 +85,7 @@ final class UnformattedResponse implements ResponseInterface
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function withAddedHeader($name, $value)
     {
         return new self(
@@ -115,9 +95,7 @@ final class UnformattedResponse implements ResponseInterface
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function withoutHeader($name)
     {
         return new self(
@@ -132,9 +110,7 @@ final class UnformattedResponse implements ResponseInterface
         return $this->decoratedResponse->getBody();
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function withBody(StreamInterface $body)
     {
         return new self(
@@ -149,9 +125,7 @@ final class UnformattedResponse implements ResponseInterface
         return $this->decoratedResponse->getStatusCode();
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function withStatus($code, $reasonPhrase = '')
     {
         return new self(

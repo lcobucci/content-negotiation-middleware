@@ -6,7 +6,6 @@ namespace Lcobucci\ContentNegotiation\Tests;
 final class PersonDto
 {
     public int $id;
-
     public string $name;
 
     public function __construct(int $id, string $name)

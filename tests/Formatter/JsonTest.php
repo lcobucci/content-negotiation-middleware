@@ -9,7 +9,9 @@ use Lcobucci\ContentNegotiation\Formatter\Json;
 use Lcobucci\ContentNegotiation\Tests\PersonDto;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
+
 use function acos;
+
 use const JSON_UNESCAPED_SLASHES;
 
 /**

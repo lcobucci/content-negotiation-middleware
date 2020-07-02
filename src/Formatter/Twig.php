@@ -22,9 +22,7 @@ final class Twig extends ContentOnly
         $this->attributeName = $attributeName;
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function formatContent($content, array $attributes = []): string
     {
         try {

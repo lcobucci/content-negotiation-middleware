@@ -8,6 +8,7 @@ use Lcobucci\ContentNegotiation\Formatter\Plates;
 use Lcobucci\ContentNegotiation\Tests\PersonDto;
 use League\Plates\Engine;
 use PHPUnit\Framework\TestCase;
+
 use function dirname;
 
 /**
