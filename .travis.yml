@@ -13,7 +13,13 @@ cache:
 before_install:
   - mv ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini{,.disabled} || echo "xdebug not available"
 
-install: travis_retry make vendor
+install:
+  - |
+    if [ $TRAVIS_PHP_VERSION = 'nightly' ]; then
+      travis_retry travis_retry make vendor EXTRA_FLAGS="--ignore-platform-reqs";
+    else
+      travis_retry travis_retry make vendor;
+    fi
 
 script:
   - make unit-test
