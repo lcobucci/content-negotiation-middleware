@@ -13,10 +13,10 @@ cache:
 before_install:
   - mv ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini{,.disabled} || echo "xdebug not available"
 
-install: travis_retry composer install
+install: travis_retry make vendor
 
 script:
-  - ./vendor/bin/phpunit
+  - make unit-test
 
 jobs:
   allow_failures:
@@ -29,7 +29,7 @@ jobs:
         - mv ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini{.disabled,}
         - if [[ ! $(php -m | grep -si xdebug) ]]; then echo "xdebug required for coverage"; exit 1; fi
       script:
-        - ./vendor/bin/phpunit --coverage-clover ./clover.xml
+        - make unit-test EXTRA_FLAGS="--coverage-clover ./clover.xml"
       after_script:
         - wget https://scrutinizer-ci.com/ocular.phar
         - php ocular.phar code-coverage:upload --format=php-clover ./clover.xml
@@ -37,12 +37,12 @@ jobs:
     - stage: Code Quality
       env: CODE_STANDARD=1
       script:
-        - ./vendor/bin/phpcs
+        - make coding-standard
 
     - stage: Code Quality
       env: STATIC_ANALYSIS=1
       script:
-        - ./vendor/bin/phpstan analyse
+        - make static-analysis
 
     - stage: Code Quality
       env: MUTATION_TESTS=1
@@ -50,4 +50,4 @@ jobs:
         - mv ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini{.disabled,}
         - if [[ ! $(php -m | grep -si xdebug) ]]; then echo "xdebug required for mutation tests"; exit 1; fi
       script:
-        - ./vendor/bin/infection --threads=$(nproc) --min-msi=100 --min-covered-msi=100
+        - make mutation-test

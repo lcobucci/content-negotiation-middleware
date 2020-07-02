@@ -5,4 +5,5 @@
 /.gitignore     export-ignore
 /.*.yml         export-ignore
 /*.dist         export-ignore
+/Makefile       export-ignore
 /README.md      export-ignore
