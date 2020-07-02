@@ -5,6 +5,7 @@ namespace Lcobucci\ContentNegotiation\Tests\Formatter;
 
 use Lcobucci\ContentNegotiation\Formatter\ContentOnly;
 use SplFileObject;
+
 use function array_keys;
 use function array_map;
 use function assert;

@@ -15,9 +15,7 @@ use RuntimeException;
  */
 final class JmsSerializerTest extends TestCase
 {
-    /**
-     * @var SerializerInterface|MockObject
-     */
+    /** @var SerializerInterface&MockObject */
     private SerializerInterface $serializer;
 
     /**

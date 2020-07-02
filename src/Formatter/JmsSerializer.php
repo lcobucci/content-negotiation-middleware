@@ -6,6 +6,7 @@ namespace Lcobucci\ContentNegotiation\Formatter;
 use JMS\Serializer\SerializerInterface;
 use Lcobucci\ContentNegotiation\ContentCouldNotBeFormatted;
 use Throwable;
+
 use function sprintf;
 
 final class JmsSerializer extends ContentOnly
@@ -19,9 +20,7 @@ final class JmsSerializer extends ContentOnly
         $this->format     = $format;
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function formatContent($content, array $attributes = []): string
     {
         try {
