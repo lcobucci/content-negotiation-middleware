@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Lcobucci\ContentNegotiation;
 
-use Fig\Http\Message\StatusCodeInterface;
+use Lcobucci\ContentNegotiation\Formatter\NotAcceptable;
 use Middlewares\ContentType;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -66,9 +66,9 @@ final class ContentTypeMiddleware implements MiddlewareInterface
         }
 
         $contentType = $this->extractContentType($response->getHeaderLine('Content-Type'));
-        $formatter   = $this->formatters[$contentType] ?? null;
+        $formatter   = $this->formatters[$contentType] ?? new NotAcceptable();
 
-        return $this->formatResponse($response, $formatter);
+        return $formatter->format($response, $this->streamFactory);
     }
 
     private function extractContentType(string $contentType): string
@@ -80,22 +80,5 @@ final class ContentTypeMiddleware implements MiddlewareInterface
         }
 
         return substr($contentType, 0, $charsetSeparatorPosition);
-    }
-
-    /**
-     * @throws ContentCouldNotBeFormatted
-     */
-    private function formatResponse(UnformattedResponse $response, ?Formatter $formatter): ResponseInterface
-    {
-        if ($formatter === null) {
-            return $response->withBody($this->streamFactory->createStream())
-                            ->withStatus(StatusCodeInterface::STATUS_NOT_ACCEPTABLE);
-        }
-
-        return $response->withBody(
-            $this->streamFactory->createStream(
-                $formatter->format($response->getUnformattedContent(), $response->getAttributes())
-            )
-        );
     }
 }

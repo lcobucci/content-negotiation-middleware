@@ -37,7 +37,7 @@ composer require lcobucci/content-negotiation-middleware middlewares/negotiation
 ### Adventure mode
 
 If you're ready for an adventure and don't want to use `middlewares/negotiation`
-to handle the detection or `zendframework/zend-diactoros` to create the response
+to handle the detection or `laminas/diactoros` to create the response
 body (`StreamInterface` implementation), don't despair! You'll only have to use
 the normal `ContentTypeMiddleware::__construct()` instead of
 `ContentTypeMiddleware::fromRecommendedSettings()`.
@@ -53,7 +53,7 @@ The nice thing about `assert()` is that we can (and should) disable it in produc
 so that we don't have useless statements.
 
 So, for production mode, we recommend you to set `zend.assertions` to `-1` in your `php.ini`.
-For development you should leave `zend.assertions` as `1` and set `assert.exception` to `1`, which
+For development, you should leave `zend.assertions` as `1` and set `assert.exception` to `1`, which
 will make PHP throw an [`AssertionError`](https://secure.php.net/manual/en/class.assertionerror.php)
 when things go wrong.
 
@@ -70,7 +70,7 @@ declare(strict_types=1);
 use Lcobucci\ContentNegotiation\ContentTypeMiddleware;
 use Lcobucci\ContentNegotiation\Formatter\Json;
 use Lcobucci\ContentNegotiation\Formatter\StringCast;
-use Zend\Diactoros\StreamFactory;
+use Laminas\Diactoros\StreamFactory;
 
 $middleware = ContentTypeMiddleware::fromRecommendedSettings(
     // First argument is the list of formats you want to support:
@@ -130,7 +130,7 @@ use Lcobucci\ContentNegotiation\UnformattedResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Zend\Diactoros\Response;
+use Laminas\Diactoros\Response;
 
 final class MyHandler implements RequestHandlerInterface
 {
@@ -167,15 +167,17 @@ declare(strict_types=1);
 namespace Me\MyApp;
 
 use Lcobucci\ContentNegotiation\Formatter;
+use Lcobucci\ContentNegotiation\UnformattedResponse;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\StreamFactoryInterface;
 
 final class MyFancyFormatter implements Formatter
 {
-    public function format($content, array $attributes = []): string
+    public function format(UnformattedResponse $response, StreamFactoryInterface $streamFactory): ResponseInterface
     {
-        // Performs all the magic with $content and creates $result with a
-        // `string` containing the formatted data.
+        $content = ''; // Do some fancy formatting of $response->getUnformattedContent() and put into $content
 
-        return $result;
+        return $response->withBody($streamFactory->createStream($content));
     }
 }
 ```

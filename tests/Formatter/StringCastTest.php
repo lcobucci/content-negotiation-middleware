@@ -16,7 +16,7 @@ final class StringCastTest extends TestCase
      * @test
      * @dataProvider validData
      *
-     * @covers ::format()
+     * @covers ::formatContent()
      *
      * @param mixed $content
      */
@@ -26,7 +26,7 @@ final class StringCastTest extends TestCase
     ): void {
         $formatter = new StringCast();
 
-        self::assertSame($expected, $formatter->format($content));
+        self::assertSame($expected, $formatter->formatContent($content));
     }
 
     /**
@@ -55,7 +55,7 @@ final class StringCastTest extends TestCase
     /**
      * @test
      *
-     * @covers ::format()
+     * @covers ::formatContent()
      */
     public function formatShouldRaiseExceptionWhenContentCouldNotBeCastToString(): void
     {
@@ -66,6 +66,6 @@ final class StringCastTest extends TestCase
         };
 
         $formatter = new StringCast();
-        $formatter->format($content);
+        $formatter->formatContent($content);
     }
 }

@@ -3,13 +3,13 @@ declare(strict_types=1);
 
 namespace Lcobucci\ContentNegotiation;
 
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\StreamFactoryInterface;
+
 interface Formatter
 {
     /**
-     * @param mixed   $content
-     * @param mixed[] $attributes
-     *
      * @throws ContentCouldNotBeFormatted
      */
-    public function format($content, array $attributes = []): string;
+    public function format(UnformattedResponse $response, StreamFactoryInterface $streamFactory): ResponseInterface;
 }

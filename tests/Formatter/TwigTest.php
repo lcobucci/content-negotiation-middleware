@@ -32,13 +32,13 @@ final class TwigTest extends TestCase
      * @test
      *
      * @covers ::__construct()
-     * @covers ::format()
+     * @covers ::formatContent()
      * @covers ::render()
      */
     public function formatShouldReturnContentFormattedByPlates(): void
     {
         $formatter = new Twig($this->environment);
-        $content   = $formatter->format(new PersonDto(1, 'Testing'), ['template' => 'person.twig']);
+        $content   = $formatter->formatContent(new PersonDto(1, 'Testing'), ['template' => 'person.twig']);
 
         self::assertStringContainsString('<dd>1</dd>', $content);
         self::assertStringContainsString('<dd>Testing</dd>', $content);
@@ -48,13 +48,13 @@ final class TwigTest extends TestCase
      * @test
      *
      * @covers ::__construct()
-     * @covers ::format()
+     * @covers ::formatContent()
      * @covers ::render()
      */
     public function formatShouldReadTemplateNameFromCustomAttribute(): void
     {
         $formatter = new Twig($this->environment, 'fancy!');
-        $content   = $formatter->format(new PersonDto(1, 'Testing'), ['fancy!' => 'person.twig']);
+        $content   = $formatter->formatContent(new PersonDto(1, 'Testing'), ['fancy!' => 'person.twig']);
 
         self::assertStringContainsString('<dd>1</dd>', $content);
         self::assertStringContainsString('<dd>Testing</dd>', $content);
@@ -64,7 +64,7 @@ final class TwigTest extends TestCase
      * @test
      *
      * @covers ::__construct()
-     * @covers ::format()
+     * @covers ::formatContent()
      * @covers ::render()
      */
     public function formatShouldConvertAnyTwigException(): void
@@ -74,6 +74,6 @@ final class TwigTest extends TestCase
         $this->expectException(ContentCouldNotBeFormatted::class);
         $this->expectExceptionMessage('An error occurred while formatting using twig');
 
-        $formatter->format(new PersonDto(1, 'Testing'), ['template' => 'no-template-at-all']);
+        $formatter->formatContent(new PersonDto(1, 'Testing'), ['template' => 'no-template-at-all']);
     }
 }
