@@ -7,3 +7,4 @@
 /*.dist         export-ignore
 /Makefile       export-ignore
 /README.md      export-ignore
+/composer.lock  export-ignore

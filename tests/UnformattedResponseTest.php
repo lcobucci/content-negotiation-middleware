@@ -8,9 +8,7 @@ use Laminas\Diactoros\Stream;
 use Lcobucci\ContentNegotiation\UnformattedResponse;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @coversDefaultClass \Lcobucci\ContentNegotiation\UnformattedResponse
- */
+/** @coversDefaultClass \Lcobucci\ContentNegotiation\UnformattedResponse */
 final class UnformattedResponseTest extends TestCase
 {
     /**
@@ -168,9 +166,7 @@ final class UnformattedResponseTest extends TestCase
         $this->assertGetterReturn('getReasonPhrase');
     }
 
-    /**
-     * @param mixed ...$arguments
-     */
+    /** @param mixed ...$arguments */
     private function assertGetterReturn(string $method, ...$arguments): void
     {
         $decoratedResponse = new Response();
@@ -245,9 +241,7 @@ final class UnformattedResponseTest extends TestCase
         $this->assertSetterReturn('withStatus', 202);
     }
 
-    /**
-     * @param mixed ...$arguments
-     */
+    /** @param mixed ...$arguments */
     private function assertSetterReturn(string $method, ...$arguments): void
     {
         $decoratedResponse = new Response();

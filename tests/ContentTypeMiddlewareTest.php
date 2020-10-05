@@ -19,9 +19,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 use function array_map;
 
-/**
- * @coversDefaultClass \Lcobucci\ContentNegotiation\ContentTypeMiddleware
- */
+/** @coversDefaultClass \Lcobucci\ContentNegotiation\ContentTypeMiddleware */
 final class ContentTypeMiddlewareTest extends TestCase
 {
     private const SUPPORTED_FORMATS = [
@@ -170,9 +168,7 @@ final class ContentTypeMiddlewareTest extends TestCase
         self::assertJsonStringEqualsJsonString('{"id":1,"name":"Testing"}', (string) $response->getBody());
     }
 
-    /**
-     * @param mixed[] $attributes
-     */
+    /** @param mixed[] $attributes */
     private function createResponse(array $attributes = []): UnformattedResponse
     {
         return new UnformattedResponse(
@@ -193,6 +189,7 @@ final class ContentTypeMiddlewareTest extends TestCase
                 $this->response = $response;
             }
 
+            // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
             public function handle(ServerRequestInterface $request): ResponseInterface
             {
                 return $this->response;
@@ -212,9 +209,7 @@ final class ContentTypeMiddlewareTest extends TestCase
         );
     }
 
-    /**
-     * @return mixed[]
-     */
+    /** @return mixed[] */
     private function configureCharset(bool $forceCharset = true): array
     {
         return array_map(

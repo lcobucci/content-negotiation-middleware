@@ -2,7 +2,6 @@
 <ruleset>
     <arg name="basepath" value="." />
     <arg name="extensions" value="php" />
-    <arg name="parallel" value="80" />
     <arg name="colors" />
     <arg name="cache" value=".phpcs.cache" />
     <arg value="p" />

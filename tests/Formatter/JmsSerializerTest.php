@@ -10,17 +10,13 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
-/**
- * @coversDefaultClass \Lcobucci\ContentNegotiation\Formatter\JmsSerializer
- */
+/** @coversDefaultClass \Lcobucci\ContentNegotiation\Formatter\JmsSerializer */
 final class JmsSerializerTest extends TestCase
 {
     /** @var SerializerInterface&MockObject */
     private SerializerInterface $serializer;
 
-    /**
-     * @before
-     */
+    /** @before */
     public function createSerializer(): void
     {
         $this->serializer = $this->createMock(SerializerInterface::class);

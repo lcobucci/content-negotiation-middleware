@@ -1,12 +1,11 @@
 # Content negotiation middleware
 
-[![Total Downloads](https://img.shields.io/packagist/dt/lcobucci/content-negotiation-middleware.svg?style=flat-square)](https://packagist.org/packages/lcobucci/content-negotiation-middleware)
-[![Latest Stable Version](https://img.shields.io/packagist/v/lcobucci/content-negotiation-middleware.svg?style=flat-square)](https://packagist.org/packages/lcobucci/content-negotiation-middleware)
-[![Unstable Version](https://img.shields.io/packagist/vpre/lcobucci/content-negotiation-middleware.svg?style=flat-square)](https://packagist.org/packages/lcobucci/content-negotiation-middleware)
+[![Total Downloads]](https://packagist.org/packages/lcobucci/content-negotiation-middleware)
+[![Latest Stable Version]](https://packagist.org/packages/lcobucci/content-negotiation-middleware)
+[![Unstable Version]](https://packagist.org/packages/lcobucci/content-negotiation-middleware)
 
-[![Build Status](https://img.shields.io/travis/lcobucci/content-negotiation-middleware/3.1.svg?style=flat-square)](http://travis-ci.org/lcobucci/content-negotiation-middleware)
-[![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/lcobucci/content-negotiation-middleware/3.1.svg?style=flat-square)](https://scrutinizer-ci.com/g/lcobucci/content-negotiation-middleware/?branch=3.1)
-[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/lcobucci/content-negotiation-middleware/3.1.svg?style=flat-square)](https://scrutinizer-ci.com/g/lcobucci/content-negotiation-middleware/?branch=3.1)
+[![Build Status]](https://github.com/lcobucci/content-negotiation-middleware/actions?query=workflow%3A%22PHPUnit%20Tests%22+branch%3A3.1)
+[![Code Coverage]](https://codecov.io/gh/lcobucci/content-negotiation-middleware)
 
 ## Motivation
 
@@ -26,11 +25,10 @@ and formatting).
 
 ## Installation
 
-This package is available on [Packagist](http://packagist.org/packages/lcobucci/content-negotiation-middleware),
-and we recommend you to install it using [Composer](http://getcomposer.org):
+This package is available on [Packagist], and we recommend you to install it using [Composer]:
 
 ```shell
-composer require lcobucci/content-negotiation-middleware middlewares/negotiation zendframework/zend-diactoros
+composer require lcobucci/content-negotiation-middleware middlewares/negotiation laminas/laminas-diactoros
 ```
 
 ### Adventure mode
@@ -103,9 +101,7 @@ $middleware = ContentTypeMiddleware::fromRecommendedSettings(
 );
 ```
 
-Then you must add the middleware to very beginning of your pipeline, which will
-depend on the library/framework you're using, but it will be something similar
-to this:
+Then you must add the middleware to very beginning of your pipeline, which will depend on the library/framework you're using, but it will be something similar to this:
 
 ```php
 <?php
@@ -115,8 +111,7 @@ to this:
 $application->pipe($middleware);
 ```
 
-Finally you just need to use `UnformattedResponse` as return of the request
-handlers you create to trigger to formatting when needed:
+Finally, you just need to use `UnformattedResponse` as return of the request handlers you create to trigger to formatting when needed:
 
 ```php
 <?php
@@ -183,5 +178,13 @@ final class MyFancyFormatter implements Formatter
 
 ## License
 
-MIT, see [LICENSE file](https://github.com/lcobucci/content-negotiation-middleware/blob/master/LICENSE).
+MIT, see [LICENSE].
 
+[Total Downloads]: https://img.shields.io/packagist/dt/lcobucci/content-negotiation-middleware.svg?style=flat-square
+[Latest Stable Version]: https://img.shields.io/packagist/v/lcobucci/content-negotiation-middleware.svg?style=flat-square
+[Unstable Version]: https://img.shields.io/packagist/vpre/lcobucci/content-negotiation-middleware.svg?style=flat-square
+[Build Status]: https://img.shields.io/github/workflow/status/lcobucci/content-negotiation-middleware/PHPUnit%20tests/3.1?style=flat-square
+[Code Coverage]: https://codecov.io/gh/lcobucci/content-negotiation-middleware/branch/3.1/graph/badge.svg
+[Packagist]: http://packagist.org/packages/lcobucci/content-negotiation-middleware
+[Composer]: http://getcomposer.org
+[LICENSE]: LICENSE

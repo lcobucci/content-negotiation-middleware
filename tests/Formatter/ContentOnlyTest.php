@@ -9,9 +9,7 @@ use Lcobucci\ContentNegotiation\Formatter\ContentOnly;
 use Lcobucci\ContentNegotiation\UnformattedResponse;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @coversDefaultClass \Lcobucci\ContentNegotiation\Formatter\ContentOnly
- */
+/** @coversDefaultClass \Lcobucci\ContentNegotiation\Formatter\ContentOnly */
 final class ContentOnlyTest extends TestCase
 {
     /**

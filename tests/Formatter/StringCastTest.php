@@ -7,9 +7,7 @@ use Lcobucci\ContentNegotiation\ContentCouldNotBeFormatted;
 use Lcobucci\ContentNegotiation\Formatter\StringCast;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @coversDefaultClass \Lcobucci\ContentNegotiation\Formatter\StringCast
- */
+/** @coversDefaultClass \Lcobucci\ContentNegotiation\Formatter\StringCast */
 final class StringCastTest extends TestCase
 {
     /**
@@ -29,9 +27,7 @@ final class StringCastTest extends TestCase
         self::assertSame($expected, $formatter->formatContent($content));
     }
 
-    /**
-     * @return mixed[][]
-     */
+    /** @return mixed[][] */
     public function validData(): array
     {
         $test = new class

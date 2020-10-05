@@ -10,9 +10,7 @@ use Lcobucci\ContentNegotiation\Formatter\NotAcceptable;
 use Lcobucci\ContentNegotiation\UnformattedResponse;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @coversDefaultClass \Lcobucci\ContentNegotiation\Formatter\NotAcceptable
- */
+/** @coversDefaultClass \Lcobucci\ContentNegotiation\Formatter\NotAcceptable */
 final class NotAcceptableTest extends TestCase
 {
     /**

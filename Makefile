@@ -1,33 +1,32 @@
-MIN_MSI=100
-MIN_COVERED_MSI=100
+PARALLELISM := $(shell nproc)
 
-ifeq ("${CI}", "true")
-	PARALLELISM=4
-else
-	PARALLELISM=$(shell nproc)
-endif
+.PHONY: all
+all: install phpcbf phpcs phpstan phpunit infection
 
-.PHONY: valid test coding-standard-fix coding-standard static-analysis unit-test mutation-test
+.PHONY: install
+install: vendor/composer/installed.json
 
-valid: coding-standard-fix coding-standard static-analysis test
+vendor/composer/installed.json: composer.json composer.lock
+	@composer install $(INSTALL_FLAGS)
+	@touch -c composer.json composer.lock vendor/composer/installed.json
 
-test: unit-test mutation-test
+.PHONY: phpunit
+phpunit:
+	@vendor/bin/phpunit
 
-vendor: composer.json
-	composer install $(EXTRA_FLAGS)
-	@touch -c vendor
+.PHONY: infection
+infection:
+	@vendor/bin/phpunit --coverage-xml=build/coverage-xml --log-junit=build/junit.xml $(PHPUNIT_FLAGS)
+	@vendor/bin/infection -s --threads=$(PARALLELISM) --coverage=build
 
-coding-standard: vendor
-	vendor/bin/phpcs --parallel=$(PARALLELISM)
+.PHONY: phpcbf
+phpcbf:
+	@vendor/bin/phpcbf --parallel=$(PARALLELISM)
 
-coding-standard-fix: vendor
-	vendor/bin/phpcbf --parallel=$(PARALLELISM) || true
+.PHONY: phpcs
+phpcs:
+	@vendor/bin/phpcs --parallel=$(PARALLELISM) $(PHPCS_FLAGS)
 
-static-analysis: vendor
-	vendor/bin/phpstan analyse $(EXTRA_FLAGS)
-
-unit-test: vendor
-	vendor/bin/phpunit --testsuite unit --stop-on-error --stop-on-failure $(EXTRA_FLAGS)
-
-mutation-test: vendor
-	vendor/bin/infection --no-progress -j=$(PARALLELISM) -s --min-msi=$(MIN_MSI) --min-covered-msi=$(MIN_COVERED_MSI) $(EXTRA_FLAGS)
+.PHONY: phpstan
+phpstan:
+	@vendor/bin/phpstan analyse

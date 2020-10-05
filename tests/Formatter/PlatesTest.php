@@ -11,16 +11,12 @@ use PHPUnit\Framework\TestCase;
 
 use function dirname;
 
-/**
- * @coversDefaultClass \Lcobucci\ContentNegotiation\Formatter\Plates
- */
+/** @coversDefaultClass \Lcobucci\ContentNegotiation\Formatter\Plates */
 final class PlatesTest extends TestCase
 {
     private Engine $engine;
 
-    /**
-     * @before
-     */
+    /** @before */
     public function configureEngine(): void
     {
         $this->engine = new Engine(dirname(__DIR__, 2) . '/templates/plates');
