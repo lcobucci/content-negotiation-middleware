@@ -21,6 +21,7 @@ final class JmsSerializer extends ContentOnly
     }
 
     /** {@inheritdoc} */
+    // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     public function formatContent($content, array $attributes = []): string
     {
         try {

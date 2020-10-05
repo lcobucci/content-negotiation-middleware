@@ -12,16 +12,12 @@ use Twig\Loader\FilesystemLoader;
 
 use function dirname;
 
-/**
- * @coversDefaultClass \Lcobucci\ContentNegotiation\Formatter\Twig
- */
+/** @coversDefaultClass \Lcobucci\ContentNegotiation\Formatter\Twig */
 final class TwigTest extends TestCase
 {
     private Environment $environment;
 
-    /**
-     * @before
-     */
+    /** @before */
     public function configureEngine(): void
     {
         $this->environment = new Environment(

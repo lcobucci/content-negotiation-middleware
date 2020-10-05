@@ -14,9 +14,7 @@ use function acos;
 
 use const JSON_UNESCAPED_SLASHES;
 
-/**
- * @coversDefaultClass \Lcobucci\ContentNegotiation\Formatter\Json
- */
+/** @coversDefaultClass \Lcobucci\ContentNegotiation\Formatter\Json */
 final class JsonTest extends TestCase
 {
     /**
@@ -103,9 +101,7 @@ final class JsonTest extends TestCase
         );
     }
 
-    /**
-     * @param mixed $content
-     */
+    /** @param mixed $content */
     private function formatContent($content): string
     {
         $formatter = new Json();

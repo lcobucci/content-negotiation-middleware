@@ -22,9 +22,7 @@ final class ContentTypeMiddleware implements MiddlewareInterface
     /** @var Formatter[] */
     private array $formatters;
 
-    /**
-     * @param Formatter[] $formatters
-     */
+    /** @param Formatter[] $formatters */
     public function __construct(
         MiddlewareInterface $negotiator,
         array $formatters,

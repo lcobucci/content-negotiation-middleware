@@ -28,9 +28,7 @@ final class NaiveTemplateEngine extends ContentOnly
         return $this->render($template, (array) $content);
     }
 
-    /**
-     * @param mixed[] $attributes
-     */
+    /** @param mixed[] $attributes */
     private function getTemplateContent(array $attributes): string
     {
         $template = $attributes['template'] ?? '';
@@ -43,9 +41,7 @@ final class NaiveTemplateEngine extends ContentOnly
         return $content;
     }
 
-    /**
-     * @param mixed[] $data
-     */
+    /** @param mixed[] $data */
     private function render(string $template, array $data): string
     {
         $variables = array_map(
