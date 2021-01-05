@@ -33,7 +33,7 @@
         "phpstan/phpstan-phpunit": "^0.12",
         "phpstan/phpstan-strict-rules": "^0.12",
         "phpunit/phpunit": "^9.5",
-        "twig/twig": "^3.1"
+        "twig/twig": "^3.2"
     },
     "suggest": {
         "jms/serializer": "For content formatting using a more flexible serializer",
