@@ -21,7 +21,7 @@
         "psr/http-server-middleware": "^1.0"
     },
     "require-dev": {
-        "infection/infection": "^0.20",
+        "infection/infection": "^0.21",
         "jms/serializer": "^3.11",
         "laminas/laminas-diactoros": "^2.5",
         "lcobucci/coding-standard": "^6.0",
