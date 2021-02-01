@@ -1,7 +1,7 @@
 {
     "name": "lcobucci/content-negotiation-middleware",
-    "description": "A PSR-15 middleware to handle content negotiation",
     "type": "library",
+    "description": "A PSR-15 middleware to handle content negotiation",
     "license": "MIT",
     "authors": [
         {
@@ -9,10 +9,6 @@
             "email": "lcobucci@gmail.com"
         }
     ],
-    "config": {
-        "preferred-install": "dist",
-        "sort-packages": true
-    },
     "require": {
         "php": "^7.4 || ^8.0",
         "ext-json": "*",
@@ -37,10 +33,14 @@
     },
     "suggest": {
         "jms/serializer": "For content formatting using a more flexible serializer",
+        "laminas/laminas-diactoros": "For concrete implementation of PSR-7",
         "league/plates": "For content formatting using Plates as template engine",
         "middlewares/negotiation": "For acceptable format identification",
-        "twig/twig": "For content formatting using Twig as template engine",
-        "laminas/laminas-diactoros": "For concrete implementation of PSR-7"
+        "twig/twig": "For content formatting using Twig as template engine"
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true
     },
     "autoload": {
         "psr-4": {
