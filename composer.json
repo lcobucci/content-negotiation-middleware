@@ -19,7 +19,7 @@
     },
     "require-dev": {
         "infection/infection": "^0.21",
-        "jms/serializer": "^3.11",
+        "jms/serializer": "^3.12",
         "laminas/laminas-diactoros": "^2.5",
         "lcobucci/coding-standard": "^6.0",
         "league/plates": "^3.4",
