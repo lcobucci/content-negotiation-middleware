@@ -1032,16 +1032,16 @@
         },
         {
             "name": "jms/serializer",
-            "version": "3.12.2",
+            "version": "3.12.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/serializer.git",
-                "reference": "ea54838a0acd960839b7401bfd83fcd6ebe34aed"
+                "reference": "f908d17afd08f0aab9c083322022682b41483c5b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/ea54838a0acd960839b7401bfd83fcd6ebe34aed",
-                "reference": "ea54838a0acd960839b7401bfd83fcd6ebe34aed",
+                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/f908d17afd08f0aab9c083322022682b41483c5b",
+                "reference": "f908d17afd08f0aab9c083322022682b41483c5b",
                 "shasum": ""
             },
             "require": {
@@ -1050,7 +1050,7 @@
                 "doctrine/lexer": "^1.1",
                 "jms/metadata": "^2.0",
                 "php": "^7.2||^8.0",
-                "phpstan/phpdoc-parser": "^0.4"
+                "phpstan/phpdoc-parser": "^0.4 || ^0.5"
             },
             "require-dev": {
                 "doctrine/coding-standard": "^8.1",
@@ -1113,7 +1113,7 @@
             ],
             "support": {
                 "issues": "https://github.com/schmittjoh/serializer/issues",
-                "source": "https://github.com/schmittjoh/serializer/tree/3.12.2"
+                "source": "https://github.com/schmittjoh/serializer/tree/3.12.3"
             },
             "funding": [
                 {
@@ -1121,7 +1121,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-03-23T12:37:04+00:00"
+            "time": "2021-04-25T11:03:24+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
