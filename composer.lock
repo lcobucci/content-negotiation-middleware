@@ -980,16 +980,16 @@
         },
         {
             "name": "jms/metadata",
-            "version": "2.5.0",
+            "version": "2.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/metadata.git",
-                "reference": "b5c52549807b2d855b3d7e36ec164c00eb547338"
+                "reference": "a995e6cef6d6f56a6226e1616a519630e2ef0aeb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/metadata/zipball/b5c52549807b2d855b3d7e36ec164c00eb547338",
-                "reference": "b5c52549807b2d855b3d7e36ec164c00eb547338",
+                "url": "https://api.github.com/repos/schmittjoh/metadata/zipball/a995e6cef6d6f56a6226e1616a519630e2ef0aeb",
+                "reference": "a995e6cef6d6f56a6226e1616a519630e2ef0aeb",
                 "shasum": ""
             },
             "require": {
@@ -1038,9 +1038,9 @@
             ],
             "support": {
                 "issues": "https://github.com/schmittjoh/metadata/issues",
-                "source": "https://github.com/schmittjoh/metadata/tree/2.5.0"
+                "source": "https://github.com/schmittjoh/metadata/tree/2.5.1"
             },
-            "time": "2021-03-07T19:20:09+00:00"
+            "time": "2021-08-04T19:32:08+00:00"
         },
         {
             "name": "jms/serializer",
