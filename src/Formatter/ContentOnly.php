@@ -16,14 +16,11 @@ abstract class ContentOnly implements Formatter
     {
         return $response->withBody(
             $streamFactory->createStream(
-                $this->formatContent($response->getUnformattedContent(), $response->getAttributes())
-            )
+                $this->formatContent($response->getUnformattedContent(), $response->getAttributes()),
+            ),
         );
     }
 
-    /**
-     * @param mixed   $content
-     * @param mixed[] $attributes
-     */
-    abstract public function formatContent($content, array $attributes = []): string;
+    /** @param mixed[] $attributes */
+    abstract public function formatContent(mixed $content, array $attributes = []): string;
 }

@@ -20,16 +20,13 @@ final class Json extends ContentOnly
 {
     private const DEFAULT_FLAGS = JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT | JSON_UNESCAPED_SLASHES;
 
-    private int $flags;
-
-    public function __construct(int $flags = self::DEFAULT_FLAGS)
+    public function __construct(private int $flags = self::DEFAULT_FLAGS)
     {
-        $this->flags = $flags;
     }
 
     /** {@inheritdoc} */
     // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
-    public function formatContent($content, array $attributes = []): string
+    public function formatContent(mixed $content, array $attributes = []): string
     {
         try {
             return json_encode($content, $this->flags | JSON_THROW_ON_ERROR);
@@ -37,7 +34,7 @@ final class Json extends ContentOnly
             throw new ContentCouldNotBeFormatted(
                 sprintf('An exception was thrown during JSON formatting: %s', $exception->getMessage()),
                 $exception->getCode(),
-                $exception
+                $exception,
             );
         }
     }

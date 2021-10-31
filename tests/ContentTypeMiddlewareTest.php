@@ -75,7 +75,7 @@ final class ContentTypeMiddlewareTest extends TestCase
 
         $response = $middleware->process(
             (new ServerRequest())->withAddedHeader('Accept', 'text/plain'),
-            $this->createRequestHandler($this->createResponse())
+            $this->createRequestHandler($this->createResponse()),
         );
 
         self::assertInstanceOf(UnformattedResponse::class, $response);
@@ -101,7 +101,7 @@ final class ContentTypeMiddlewareTest extends TestCase
 
         $response = $middleware->process(
             new ServerRequest(),
-            $this->createRequestHandler($this->createResponse())
+            $this->createRequestHandler($this->createResponse()),
         );
 
         self::assertInstanceOf(UnformattedResponse::class, $response);
@@ -128,7 +128,7 @@ final class ContentTypeMiddlewareTest extends TestCase
 
         $response = $middleware->process(
             (new ServerRequest())->withAddedHeader('Accept', 'text/html'),
-            $this->createRequestHandler($this->createResponse(['template' => 'person']))
+            $this->createRequestHandler($this->createResponse(['template' => 'person'])),
         );
 
         self::assertInstanceOf(UnformattedResponse::class, $response);
@@ -159,7 +159,7 @@ final class ContentTypeMiddlewareTest extends TestCase
 
         $response = $middleware->process(
             new ServerRequest(),
-            $this->createRequestHandler($this->createResponse())
+            $this->createRequestHandler($this->createResponse()),
         );
 
         self::assertInstanceOf(UnformattedResponse::class, $response);
@@ -174,7 +174,7 @@ final class ContentTypeMiddlewareTest extends TestCase
         return new UnformattedResponse(
             new Response(),
             new PersonDto(1, 'Testing'),
-            $attributes
+            $attributes,
         );
     }
 
@@ -182,11 +182,8 @@ final class ContentTypeMiddlewareTest extends TestCase
     {
         return new class ($response) implements RequestHandlerInterface
         {
-            private ResponseInterface $response;
-
-            public function __construct(ResponseInterface $response)
+            public function __construct(private ResponseInterface $response)
             {
-                $this->response = $response;
             }
 
             // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
@@ -205,7 +202,7 @@ final class ContentTypeMiddlewareTest extends TestCase
                 'application/json' => new Formatter\Json(),
                 'text/html'        => new NaiveTemplateEngine(),
             ],
-            new StreamFactory()
+            new StreamFactory(),
         );
     }
 
@@ -216,7 +213,7 @@ final class ContentTypeMiddlewareTest extends TestCase
             static function (array $config) use ($forceCharset): array {
                 return ['charset' => $forceCharset] + $config;
             },
-            self::SUPPORTED_FORMATS
+            self::SUPPORTED_FORMATS,
         );
     }
 }

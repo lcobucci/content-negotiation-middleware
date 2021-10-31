@@ -11,17 +11,12 @@ final class Plates extends ContentOnly
 {
     private const DEFAULT_ATTRIBUTE = 'template';
 
-    private Engine $engine;
-    private string $attributeName;
-
-    public function __construct(Engine $engine, string $attributeName = self::DEFAULT_ATTRIBUTE)
+    public function __construct(private Engine $engine, private string $attributeName = self::DEFAULT_ATTRIBUTE)
     {
-        $this->engine        = $engine;
-        $this->attributeName = $attributeName;
     }
 
     /** {@inheritdoc} */
-    public function formatContent($content, array $attributes = []): string
+    public function formatContent(mixed $content, array $attributes = []): string
     {
         try {
             return $this->render($content, $attributes);
@@ -29,18 +24,17 @@ final class Plates extends ContentOnly
             throw new ContentCouldNotBeFormatted(
                 'An error occurred while formatting using plates',
                 $exception->getCode(),
-                $exception
+                $exception,
             );
         }
     }
 
     /**
-     * @param mixed   $content
      * @param mixed[] $attributes
      *
      * @throws Throwable
      */
-    private function render($content, array $attributes = []): string
+    private function render(mixed $content, array $attributes = []): string
     {
         $template = $attributes[$this->attributeName] ?? '';
 

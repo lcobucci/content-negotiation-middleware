@@ -16,21 +16,12 @@ use function substr;
 
 final class ContentTypeMiddleware implements MiddlewareInterface
 {
-    private MiddlewareInterface $negotiator;
-    private StreamFactoryInterface $streamFactory;
-
-    /** @var Formatter[] */
-    private array $formatters;
-
     /** @param Formatter[] $formatters */
     public function __construct(
-        MiddlewareInterface $negotiator,
-        array $formatters,
-        StreamFactoryInterface $streamFactory
+        private MiddlewareInterface $negotiator,
+        private array $formatters,
+        private StreamFactoryInterface $streamFactory,
     ) {
-        $this->negotiator    = $negotiator;
-        $this->formatters    = $formatters;
-        $this->streamFactory = $streamFactory;
     }
 
     /**
@@ -40,12 +31,12 @@ final class ContentTypeMiddleware implements MiddlewareInterface
     public static function fromRecommendedSettings(
         array $formats,
         array $formatters,
-        StreamFactoryInterface $streamFactory
+        StreamFactoryInterface $streamFactory,
     ): self {
         return new self(
             new ContentType($formats),
             $formatters,
-            $streamFactory
+            $streamFactory,
         );
     }
 

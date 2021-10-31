@@ -29,7 +29,7 @@ final class JsonTest extends TestCase
         self::assertSame(
             '["<foo>","\'bar\'","\"baz\"","&blong&","\u00e9","http://"]',
             (new Json(JSON_UNESCAPED_SLASHES))
-                ->formatContent(['<foo>', "'bar'", '"baz"', '&blong&', "\xc3\xa9", 'http://'])
+                ->formatContent(['<foo>', "'bar'", '"baz"', '&blong&', "\xc3\xa9", 'http://']),
         );
     }
 
@@ -44,7 +44,7 @@ final class JsonTest extends TestCase
     {
         self::assertSame(
             '["\u003Cfoo\u003E","\u0027bar\u0027","\u0022baz\u0022","\u0026blong\u0026","\u00e9","http://"]',
-            $this->formatContent(['<foo>', "'bar'", '"baz"', '&blong&', "\xc3\xa9", 'http://'])
+            $this->formatContent(['<foo>', "'bar'", '"baz"', '&blong&', "\xc3\xa9", 'http://']),
         );
     }
 
@@ -59,7 +59,7 @@ final class JsonTest extends TestCase
     {
         self::assertJsonStringEqualsJsonString(
             '{"id":1,"name":"Test"}',
-            $this->formatContent(new PersonDto(1, 'Test'))
+            $this->formatContent(new PersonDto(1, 'Test')),
         );
     }
 
@@ -97,12 +97,11 @@ final class JsonTest extends TestCase
                 {
                     throw new RuntimeException('This should be converted');
                 }
-            }
+            },
         );
     }
 
-    /** @param mixed $content */
-    private function formatContent($content): string
+    private function formatContent(mixed $content): string
     {
         $formatter = new Json();
 
