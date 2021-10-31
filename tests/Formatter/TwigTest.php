@@ -21,7 +21,7 @@ final class TwigTest extends TestCase
     public function configureEngine(): void
     {
         $this->environment = new Environment(
-            new FilesystemLoader('templates/twig', dirname(__DIR__, 2) . '/')
+            new FilesystemLoader('templates/twig', dirname(__DIR__, 2) . '/'),
         );
     }
 

@@ -11,19 +11,14 @@ final class Twig extends ContentOnly
 {
     private const DEFAULT_ATTRIBUTE = 'template';
 
-    private Environment $environment;
-    private string $attributeName;
-
     public function __construct(
-        Environment $environment,
-        string $attributeName = self::DEFAULT_ATTRIBUTE
+        private Environment $environment,
+        private string $attributeName = self::DEFAULT_ATTRIBUTE,
     ) {
-        $this->environment   = $environment;
-        $this->attributeName = $attributeName;
     }
 
     /** {@inheritdoc} */
-    public function formatContent($content, array $attributes = []): string
+    public function formatContent(mixed $content, array $attributes = []): string
     {
         try {
             return $this->render($content, $attributes);
@@ -31,18 +26,17 @@ final class Twig extends ContentOnly
             throw new ContentCouldNotBeFormatted(
                 'An error occurred while formatting using twig',
                 $exception->getCode(),
-                $exception
+                $exception,
             );
         }
     }
 
     /**
-     * @param mixed   $content
      * @param mixed[] $attributes
      *
      * @throws Throwable
      */
-    private function render($content, array $attributes = []): string
+    private function render(mixed $content, array $attributes = []): string
     {
         $template = $attributes[$this->attributeName] ?? '';
 

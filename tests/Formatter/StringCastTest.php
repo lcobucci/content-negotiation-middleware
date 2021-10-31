@@ -15,12 +15,10 @@ final class StringCastTest extends TestCase
      * @dataProvider validData
      *
      * @covers ::formatContent()
-     *
-     * @param mixed $content
      */
     public function formatShouldSimplyReturnTheStringRepresentationOfTheContent(
         string $expected,
-        $content
+        mixed $content,
     ): void {
         $formatter = new StringCast();
 

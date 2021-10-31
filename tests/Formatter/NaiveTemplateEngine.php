@@ -21,7 +21,7 @@ final class NaiveTemplateEngine extends ContentOnly
     /**
      * {@inheritdoc}
      */
-    public function formatContent($content, array $attributes = []): string
+    public function formatContent(mixed $content, array $attributes = []): string
     {
         $template = $this->getTemplateContent($attributes);
 
@@ -48,7 +48,7 @@ final class NaiveTemplateEngine extends ContentOnly
             static function (string $attribute): string {
                 return '{' . $attribute . '}';
             },
-            array_keys($data)
+            array_keys($data),
         );
 
         return trim(str_replace($variables, $data, $template));

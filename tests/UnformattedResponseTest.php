@@ -55,7 +55,7 @@ final class UnformattedResponseTest extends TestCase
         $response = new UnformattedResponse(
             new Response(),
             new PersonDto(1, 'Testing'),
-            ['test' => 1]
+            ['test' => 1],
         );
 
         self::assertSame(['test' => 2], $response->withAttribute('test', 2)->getAttributes());
@@ -72,7 +72,7 @@ final class UnformattedResponseTest extends TestCase
         $response = new UnformattedResponse(
             new Response(),
             new PersonDto(1, 'Testing'),
-            ['test' => 1]
+            ['test' => 1],
         );
 
         self::assertSame(['test' => 1], $response->getAttributes());
@@ -166,8 +166,7 @@ final class UnformattedResponseTest extends TestCase
         $this->assertGetterReturn('getReasonPhrase');
     }
 
-    /** @param mixed ...$arguments */
-    private function assertGetterReturn(string $method, ...$arguments): void
+    private function assertGetterReturn(string $method, mixed ...$arguments): void
     {
         $decoratedResponse = new Response();
         $response          = new UnformattedResponse($decoratedResponse, new PersonDto(1, 'Testing'));
@@ -241,8 +240,7 @@ final class UnformattedResponseTest extends TestCase
         $this->assertSetterReturn('withStatus', 202);
     }
 
-    /** @param mixed ...$arguments */
-    private function assertSetterReturn(string $method, ...$arguments): void
+    private function assertSetterReturn(string $method, mixed ...$arguments): void
     {
         $decoratedResponse = new Response();
         $dto               = new PersonDto(1, 'Testing');
@@ -251,7 +249,7 @@ final class UnformattedResponseTest extends TestCase
         $expected = new UnformattedResponse(
             $decoratedResponse->$method(...$arguments),
             $dto,
-            ['test' => 1]
+            ['test' => 1],
         );
 
         self::assertEquals($expected, $response->$method(...$arguments));

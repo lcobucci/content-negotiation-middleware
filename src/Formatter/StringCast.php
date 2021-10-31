@@ -12,7 +12,7 @@ final class StringCast extends ContentOnly
 {
     /** {@inheritdoc} */
     // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
-    public function formatContent($content, array $attributes = []): string
+    public function formatContent(mixed $content, array $attributes = []): string
     {
         if (is_object($content) && ! method_exists($content, '__toString')) {
             throw new ContentCouldNotBeFormatted('Given data could not be cast to string');
