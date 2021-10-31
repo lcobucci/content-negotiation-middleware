@@ -93,7 +93,7 @@ final class JsonTest extends TestCase
         $this->formatContent(
             new class implements JsonSerializable
             {
-                public function jsonSerialize(): void
+                public function jsonSerialize(): mixed
                 {
                     throw new RuntimeException('This should be converted');
                 }
