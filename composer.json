@@ -1,8 +1,8 @@
 {
     "name": "lcobucci/content-negotiation-middleware",
-    "type": "library",
     "description": "A PSR-15 middleware to handle content negotiation",
     "license": "MIT",
+    "type": "library",
     "authors": [
         {
             "name": "Luís Cobucci",
@@ -39,10 +39,6 @@
         "middlewares/negotiation": "For acceptable format identification",
         "twig/twig": "For content formatting using Twig as template engine"
     },
-    "config": {
-        "preferred-install": "dist",
-        "sort-packages": true
-    },
     "autoload": {
         "psr-4": {
             "Lcobucci\\ContentNegotiation\\": "src"
@@ -52,5 +48,9 @@
         "psr-4": {
             "Lcobucci\\ContentNegotiation\\Tests\\": "tests"
         }
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true
     }
 }
