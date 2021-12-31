@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6acf1d1f14c0b1fb0791e05f3cd2781f",
+    "content-hash": "07ac54774979b32a85017574501bd350",
     "packages": [
         {
             "name": "fig/http-message-util",
@@ -1128,16 +1128,16 @@
         },
         {
             "name": "jms/serializer",
-            "version": "3.16.0",
+            "version": "3.17.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/serializer.git",
-                "reference": "9b0b5208a6edb20b979c7d95bdda53a46098a7d9"
+                "reference": "190f64b051795d447ec755acbfdb1bff330a6707"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/9b0b5208a6edb20b979c7d95bdda53a46098a7d9",
-                "reference": "9b0b5208a6edb20b979c7d95bdda53a46098a7d9",
+                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/190f64b051795d447ec755acbfdb1bff330a6707",
+                "reference": "190f64b051795d447ec755acbfdb1bff330a6707",
                 "shasum": ""
             },
             "require": {
@@ -1158,7 +1158,7 @@
                 "ocramius/proxy-manager": "^1.0|^2.0",
                 "phpbench/phpbench": "^1.0",
                 "phpstan/phpstan": "^1.0.2",
-                "phpunit/phpunit": "^8.0||^9.0",
+                "phpunit/phpunit": "^8.5.21||^9.0",
                 "psr/container": "^1.0",
                 "symfony/dependency-injection": "^3.0|^4.0|^5.0|^6.0",
                 "symfony/expression-language": "^3.2|^4.0|^5.0|^6.0",
@@ -1210,7 +1210,7 @@
             ],
             "support": {
                 "issues": "https://github.com/schmittjoh/serializer/issues",
-                "source": "https://github.com/schmittjoh/serializer/tree/3.16.0"
+                "source": "https://github.com/schmittjoh/serializer/tree/3.17.1"
             },
             "funding": [
                 {
@@ -1218,7 +1218,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-11-22T07:03:41+00:00"
+            "time": "2021-12-28T20:59:55+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
