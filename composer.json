@@ -23,7 +23,7 @@
         "laminas/laminas-diactoros": "^2.8",
         "lcobucci/coding-standard": "^8.0",
         "league/plates": "^3.4",
-        "middlewares/negotiation": "^2.0",
+        "middlewares/negotiation": "^2.1",
         "phpstan/extension-installer": "^1.1",
         "phpstan/phpstan": "^0.12",
         "phpstan/phpstan-deprecation-rules": "^0.12",
