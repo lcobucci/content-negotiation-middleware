@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e85e3a1c75d71d77268e9891afce4e57",
+    "content-hash": "fa892a217dcb71232d39412e85e0b0f7",
     "packages": [
         {
             "name": "fig/http-message-util",
@@ -1304,16 +1304,16 @@
         },
         {
             "name": "laminas/laminas-diactoros",
-            "version": "2.8.0",
+            "version": "2.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-diactoros.git",
-                "reference": "0c26ef1d95b6d7e6e3943a243ba3dc0797227199"
+                "reference": "954e2dcfb1607681be44599faac10fc63bb6925a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-diactoros/zipball/0c26ef1d95b6d7e6e3943a243ba3dc0797227199",
-                "reference": "0c26ef1d95b6d7e6e3943a243ba3dc0797227199",
+                "url": "https://api.github.com/repos/laminas/laminas-diactoros/zipball/954e2dcfb1607681be44599faac10fc63bb6925a",
+                "reference": "954e2dcfb1607681be44599faac10fc63bb6925a",
                 "shasum": ""
             },
             "require": {
@@ -1399,7 +1399,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2021-09-22T03:54:36+00:00"
+            "time": "2022-03-29T20:12:16+00:00"
         },
         {
             "name": "lcobucci/coding-standard",
