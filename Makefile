@@ -12,12 +12,12 @@ vendor/composer/installed.json: composer.json composer.lock
 
 .PHONY: phpunit
 phpunit:
-	@vendor/bin/phpunit
+	@php -d assert.exception=1 -d zend.assertions=1 vendor/bin/phpunit
 
 .PHONY: infection
 infection:
-	@vendor/bin/phpunit --coverage-xml=build/coverage-xml --log-junit=build/junit.xml $(PHPUNIT_FLAGS)
-	@vendor/bin/infection -s --threads=$(PARALLELISM) --coverage=build
+	@php -d assert.exception=1 -d zend.assertions=1 -d xdebug.mode=coverage vendor/bin/phpunit --coverage-xml=build/coverage-xml --log-junit=build/junit.xml $(PHPUNIT_FLAGS)
+	@php -d assert.exception=1 -d zend.assertions=1 vendor/bin/infection -s --threads=$(PARALLELISM) --coverage=build
 
 .PHONY: phpcbf
 phpcbf:

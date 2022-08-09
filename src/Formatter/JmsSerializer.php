@@ -11,8 +11,10 @@ use function sprintf;
 
 final class JmsSerializer extends ContentOnly
 {
-    public function __construct(private SerializerInterface $serializer, private string $format)
-    {
+    public function __construct(
+        private readonly SerializerInterface $serializer,
+        private readonly string $format,
+    ) {
     }
 
     /** {@inheritdoc} */

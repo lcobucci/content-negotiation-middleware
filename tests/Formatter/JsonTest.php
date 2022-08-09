@@ -103,8 +103,6 @@ final class JsonTest extends TestCase
 
     private function formatContent(mixed $content): string
     {
-        $formatter = new Json();
-
-        return $formatter->formatContent($content);
+        return (new Json())->formatContent($content);
     }
 }

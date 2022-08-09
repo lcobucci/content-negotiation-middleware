@@ -20,7 +20,7 @@ final class Json extends ContentOnly
 {
     private const DEFAULT_FLAGS = JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT | JSON_UNESCAPED_SLASHES;
 
-    public function __construct(private int $flags = self::DEFAULT_FLAGS)
+    public function __construct(private readonly int $flags = self::DEFAULT_FLAGS)
     {
     }
 

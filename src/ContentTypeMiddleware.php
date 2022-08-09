@@ -18,9 +18,9 @@ final class ContentTypeMiddleware implements MiddlewareInterface
 {
     /** @param Formatter[] $formatters */
     public function __construct(
-        private MiddlewareInterface $negotiator,
-        private array $formatters,
-        private StreamFactoryInterface $streamFactory,
+        private readonly MiddlewareInterface $negotiator,
+        private readonly array $formatters,
+        private readonly StreamFactoryInterface $streamFactory,
     ) {
     }
 
@@ -54,9 +54,9 @@ final class ContentTypeMiddleware implements MiddlewareInterface
         }
 
         $contentType = $this->extractContentType($response->getHeaderLine('Content-Type'));
-        $formatter   = $this->formatters[$contentType] ?? new NotAcceptable();
 
-        return $formatter->format($response, $this->streamFactory);
+        return ($this->formatters[$contentType] ?? new NotAcceptable())
+            ->format($response, $this->streamFactory);
     }
 
     private function extractContentType(string $contentType): string
