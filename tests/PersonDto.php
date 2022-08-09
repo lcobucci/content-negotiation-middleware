@@ -5,7 +5,7 @@ namespace Lcobucci\ContentNegotiation\Tests;
 
 final class PersonDto
 {
-    public function __construct(public int $id, public string $name)
+    public function __construct(public readonly int $id, public readonly string $name)
     {
     }
 }

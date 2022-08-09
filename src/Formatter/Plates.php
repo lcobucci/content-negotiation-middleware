@@ -14,8 +14,10 @@ final class Plates extends ContentOnly
 {
     private const DEFAULT_ATTRIBUTE = 'template';
 
-    public function __construct(private Engine $engine, private string $attributeName = self::DEFAULT_ATTRIBUTE)
-    {
+    public function __construct(
+        private readonly Engine $engine,
+        private readonly string $attributeName = self::DEFAULT_ATTRIBUTE,
+    ) {
     }
 
     /** {@inheritdoc} */

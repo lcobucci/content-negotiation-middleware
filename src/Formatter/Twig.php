@@ -15,8 +15,8 @@ final class Twig extends ContentOnly
     private const DEFAULT_ATTRIBUTE = 'template';
 
     public function __construct(
-        private Environment $environment,
-        private string $attributeName = self::DEFAULT_ATTRIBUTE,
+        private readonly Environment $environment,
+        private readonly string $attributeName = self::DEFAULT_ATTRIBUTE,
     ) {
     }
 

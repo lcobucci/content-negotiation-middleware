@@ -10,9 +10,9 @@ final class UnformattedResponse implements ResponseInterface
 {
     /** @param array<string, mixed> $attributes */
     public function __construct(
-        private ResponseInterface $decoratedResponse,
-        private mixed $unformattedContent,
-        private array $attributes = [],
+        private readonly ResponseInterface $decoratedResponse,
+        private readonly mixed $unformattedContent,
+        private readonly array $attributes = [],
     ) {
     }
 
