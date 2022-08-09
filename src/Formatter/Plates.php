@@ -7,6 +7,9 @@ use Lcobucci\ContentNegotiation\ContentCouldNotBeFormatted;
 use League\Plates\Engine;
 use Throwable;
 
+use function assert;
+use function is_string;
+
 final class Plates extends ContentOnly
 {
     private const DEFAULT_ATTRIBUTE = 'template';
@@ -37,6 +40,7 @@ final class Plates extends ContentOnly
     private function render(mixed $content, array $attributes = []): string
     {
         $template = $attributes[$this->attributeName] ?? '';
+        assert(is_string($template));
 
         return $this->engine->render($template, ['content' => $content]);
     }
