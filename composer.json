@@ -24,7 +24,7 @@
         "lcobucci/coding-standard": "^9.0",
         "league/plates": "^3.4",
         "middlewares/negotiation": "^2.1",
-        "phpstan/extension-installer": "^1.1",
+        "phpstan/extension-installer": "^1.2",
         "phpstan/phpstan": "^1.8",
         "phpstan/phpstan-deprecation-rules": "^1.0",
         "phpstan/phpstan-phpunit": "^1.1",
