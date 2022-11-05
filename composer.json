@@ -12,25 +12,25 @@
     "require": {
         "php": "^8.1",
         "ext-json": "*",
-        "fig/http-message-util": "^1.1",
-        "psr/http-factory": "^1.0",
-        "psr/http-message": "^1.0",
-        "psr/http-server-middleware": "^1.0"
+        "fig/http-message-util": "^1.1.5",
+        "psr/http-factory": "^1.0.1",
+        "psr/http-message": "^1.0.1",
+        "psr/http-server-middleware": "^1.0.1"
     },
     "require-dev": {
         "infection/infection": "^0.26",
-        "jms/serializer": "^3.18",
+        "jms/serializer": "^3.18.2",
         "laminas/laminas-diactoros": "^2.20",
         "lcobucci/coding-standard": "^9.0",
         "league/plates": "^3.4",
         "middlewares/negotiation": "^2.1",
         "phpstan/extension-installer": "^1.2",
-        "phpstan/phpstan": "^1.8",
+        "phpstan/phpstan": "^1.9.1",
         "phpstan/phpstan-deprecation-rules": "^1.0",
-        "phpstan/phpstan-phpunit": "^1.2",
-        "phpstan/phpstan-strict-rules": "^1.4",
-        "phpunit/phpunit": "^9.5",
-        "twig/twig": "^3.4"
+        "phpstan/phpstan-phpunit": "^1.2.2",
+        "phpstan/phpstan-strict-rules": "^1.4.4",
+        "phpunit/phpunit": "^9.5.26",
+        "twig/twig": "^3.4.3"
     },
     "suggest": {
         "jms/serializer": "For content formatting using a more flexible serializer",
