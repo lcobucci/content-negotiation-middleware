@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3b10bbf2f0c5f984be94ed774c033921",
+    "content-hash": "4c19cf8138a0fcb2e3c97ca2a751344e",
     "packages": [
         {
             "name": "fig/http-message-util",
@@ -1280,16 +1280,16 @@
         },
         {
             "name": "jms/serializer",
-            "version": "3.20.0",
+            "version": "3.21.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/serializer.git",
-                "reference": "0fa5e4f332fdce524aef5e5d4572d98d30168437"
+                "reference": "cc49ca6cd97baa173166c1f4fc54521964cf28bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/0fa5e4f332fdce524aef5e5d4572d98d30168437",
-                "reference": "0fa5e4f332fdce524aef5e5d4572d98d30168437",
+                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/cc49ca6cd97baa173166c1f4fc54521964cf28bd",
+                "reference": "cc49ca6cd97baa173166c1f4fc54521964cf28bd",
                 "shasum": ""
             },
             "require": {
@@ -1364,7 +1364,7 @@
             ],
             "support": {
                 "issues": "https://github.com/schmittjoh/serializer/issues",
-                "source": "https://github.com/schmittjoh/serializer/tree/3.20.0"
+                "source": "https://github.com/schmittjoh/serializer/tree/3.21.0"
             },
             "funding": [
                 {
@@ -1372,7 +1372,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-01-06T21:17:32+00:00"
+            "time": "2023-01-10T13:08:17+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
