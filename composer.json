@@ -25,10 +25,10 @@
         "league/plates": "^3.4",
         "middlewares/negotiation": "^2.1",
         "phpstan/extension-installer": "^1.2",
-        "phpstan/phpstan": "^1.9.8",
+        "phpstan/phpstan": "^1.9.11",
         "phpstan/phpstan-deprecation-rules": "^1.1.1",
         "phpstan/phpstan-phpunit": "^1.3.3",
-        "phpstan/phpstan-strict-rules": "^1.4.4",
+        "phpstan/phpstan-strict-rules": "^1.4.5",
         "phpunit/phpunit": "^9.5.27",
         "twig/twig": "^3.5.0"
     },
