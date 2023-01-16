@@ -22,7 +22,7 @@
         "jms/serializer": "^3.21.0",
         "laminas/laminas-diactoros": "^2.24.0",
         "lcobucci/coding-standard": "^9.0",
-        "league/plates": "^3.4",
+        "league/plates": "^3.5.0",
         "middlewares/negotiation": "^2.1",
         "phpstan/extension-installer": "^1.2",
         "phpstan/phpstan": "^1.9.11",
