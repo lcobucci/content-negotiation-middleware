@@ -41,7 +41,7 @@ final class ContentTypeMiddleware implements MiddlewareInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @throws ContentCouldNotBeFormatted
      */

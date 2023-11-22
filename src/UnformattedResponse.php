@@ -26,7 +26,7 @@ final class UnformattedResponse implements ResponseInterface
         return $this->decoratedResponse->getProtocolVersion();
     }
 
-    /** {@inheritdoc} */
+    /** {@inheritDoc} */
     public function withProtocolVersion($version)
     {
         return new self(
@@ -36,31 +36,31 @@ final class UnformattedResponse implements ResponseInterface
         );
     }
 
-    /** {@inheritdoc} */
+    /** {@inheritDoc} */
     public function getHeaders(): array
     {
         return $this->decoratedResponse->getHeaders();
     }
 
-    /** {@inheritdoc} */
+    /** {@inheritDoc} */
     public function hasHeader($name): bool
     {
         return $this->decoratedResponse->hasHeader($name);
     }
 
-    /** {@inheritdoc} */
+    /** {@inheritDoc} */
     public function getHeader($name)
     {
         return $this->decoratedResponse->getHeader($name);
     }
 
-    /** {@inheritdoc} */
+    /** {@inheritDoc} */
     public function getHeaderLine($name): string
     {
         return $this->decoratedResponse->getHeaderLine($name);
     }
 
-    /** {@inheritdoc} */
+    /** {@inheritDoc} */
     public function withHeader($name, $value)
     {
         return new self(
@@ -70,7 +70,7 @@ final class UnformattedResponse implements ResponseInterface
         );
     }
 
-    /** {@inheritdoc} */
+    /** {@inheritDoc} */
     public function withAddedHeader($name, $value)
     {
         return new self(
@@ -80,7 +80,7 @@ final class UnformattedResponse implements ResponseInterface
         );
     }
 
-    /** {@inheritdoc} */
+    /** {@inheritDoc} */
     public function withoutHeader($name)
     {
         return new self(
@@ -95,7 +95,7 @@ final class UnformattedResponse implements ResponseInterface
         return $this->decoratedResponse->getBody();
     }
 
-    /** {@inheritdoc} */
+    /** {@inheritDoc} */
     public function withBody(StreamInterface $body)
     {
         return new self(
@@ -110,7 +110,7 @@ final class UnformattedResponse implements ResponseInterface
         return $this->decoratedResponse->getStatusCode();
     }
 
-    /** {@inheritdoc} */
+    /** {@inheritDoc} */
     public function withStatus($code, $reasonPhrase = '')
     {
         return new self(
