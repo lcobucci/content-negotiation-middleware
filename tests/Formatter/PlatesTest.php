@@ -3,71 +3,72 @@ declare(strict_types=1);
 
 namespace Lcobucci\ContentNegotiation\Tests\Formatter;
 
+use Laminas\Diactoros\Response;
+use Laminas\Diactoros\StreamFactory;
 use Lcobucci\ContentNegotiation\ContentCouldNotBeFormatted;
+use Lcobucci\ContentNegotiation\Formatter\ContentOnly;
 use Lcobucci\ContentNegotiation\Formatter\Plates;
 use Lcobucci\ContentNegotiation\Tests\PersonDto;
+use Lcobucci\ContentNegotiation\UnformattedResponse;
 use League\Plates\Engine;
+use PHPUnit\Framework\Attributes as PHPUnit;
 use PHPUnit\Framework\TestCase;
 
 use function dirname;
 
-/** @coversDefaultClass \Lcobucci\ContentNegotiation\Formatter\Plates */
+#[PHPUnit\CoversClass(Plates::class)]
+#[PHPUnit\CoversClass(ContentOnly::class)]
+#[PHPUnit\UsesClass(UnformattedResponse::class)]
 final class PlatesTest extends TestCase
 {
-    private Engine $engine;
-
-    /** @before */
-    public function configureEngine(): void
-    {
-        $this->engine = new Engine(dirname(__DIR__, 2) . '/templates/plates');
-    }
-
-    /**
-     * @test
-     *
-     * @covers ::__construct()
-     * @covers ::formatContent()
-     * @covers ::render()
-     */
+    #[PHPUnit\Test]
     public function formatShouldReturnContentFormattedByPlates(): void
     {
-        $formatter = new Plates($this->engine);
-        $content   = $formatter->formatContent(new PersonDto(1, 'Testing'), ['template' => 'person']);
+        $content = $this->format(
+            new PersonDto(1, 'Testing'),
+            ['template' => 'person'],
+        );
 
         self::assertStringContainsString('<dd>1</dd>', $content);
         self::assertStringContainsString('<dd>Testing</dd>', $content);
     }
 
-    /**
-     * @test
-     *
-     * @covers ::__construct()
-     * @covers ::formatContent()
-     * @covers ::render()
-     */
+    #[PHPUnit\Test]
     public function formatShouldReadTemplateNameFromCustomAttribute(): void
     {
-        $formatter = new Plates($this->engine, 'fancy!');
-        $content   = $formatter->formatContent(new PersonDto(1, 'Testing'), ['fancy!' => 'person']);
+        $content = $this->format(
+            new PersonDto(1, 'Testing'),
+            ['fancy!' => 'person'],
+            'fancy!',
+        );
 
         self::assertStringContainsString('<dd>1</dd>', $content);
         self::assertStringContainsString('<dd>Testing</dd>', $content);
     }
 
-    /**
-     * @test
-     *
-     * @covers ::__construct()
-     * @covers ::formatContent()
-     * @covers ::render()
-     */
+    #[PHPUnit\Test]
     public function formatShouldConvertAnyPlatesException(): void
     {
-        $formatter = new Plates($this->engine);
-
         $this->expectException(ContentCouldNotBeFormatted::class);
         $this->expectExceptionMessage('An error occurred while formatting using plates');
 
-        $formatter->formatContent(new PersonDto(1, 'Testing'), ['template' => 'no-template-at-all']);
+        $this->format(new PersonDto(1, 'Testing'), ['template' => 'no-template-at-all']);
+    }
+
+    /** @param array<string, mixed> $attributes */
+    private function format(
+        mixed $content,
+        array $attributes = [],
+        string $templateAttribute = 'template',
+    ): string {
+        $formatter = new Plates(
+            new Engine(dirname(__DIR__, 2) . '/templates/plates'),
+            $templateAttribute,
+        );
+
+        return (string) $formatter->format(
+            new UnformattedResponse(new Response(), $content, $attributes),
+            new StreamFactory(),
+        )->getBody();
     }
 }

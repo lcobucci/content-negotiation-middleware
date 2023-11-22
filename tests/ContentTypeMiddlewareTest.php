@@ -12,6 +12,7 @@ use Lcobucci\ContentNegotiation\ContentTypeMiddleware;
 use Lcobucci\ContentNegotiation\Formatter;
 use Lcobucci\ContentNegotiation\Tests\Formatter\NaiveTemplateEngine;
 use Lcobucci\ContentNegotiation\UnformattedResponse;
+use PHPUnit\Framework\Attributes as PHPUnit;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -19,7 +20,11 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 use function array_map;
 
-/** @coversDefaultClass \Lcobucci\ContentNegotiation\ContentTypeMiddleware */
+#[PHPUnit\CoversClass(ContentTypeMiddleware::class)]
+#[PHPUnit\UsesClass(Formatter\Json::class)]
+#[PHPUnit\UsesClass(Formatter\ContentOnly::class)]
+#[PHPUnit\UsesClass(Formatter\NotAcceptable::class)]
+#[PHPUnit\UsesClass(UnformattedResponse::class)]
 final class ContentTypeMiddlewareTest extends TestCase
 {
     private const SUPPORTED_FORMATS = [
@@ -37,16 +42,7 @@ final class ContentTypeMiddlewareTest extends TestCase
         ],
     ];
 
-    /**
-     * @test
-     *
-     * @covers ::__construct()
-     * @covers ::fromRecommendedSettings()
-     * @covers ::process()
-     *
-     * @uses \Lcobucci\ContentNegotiation\Formatter\Json
-     * @uses \Lcobucci\ContentNegotiation\Formatter\ContentOnly
-     */
+    #[PHPUnit\Test]
     public function processShouldReturnFormattedResponseDirectly(): void
     {
         $middleware = $this->createMiddleware();
@@ -57,18 +53,7 @@ final class ContentTypeMiddlewareTest extends TestCase
         self::assertSame('application/json; charset=UTF-8', $response->getHeaderLine('Content-Type'));
     }
 
-    /**
-     * @test
-     *
-     * @covers ::__construct()
-     * @covers ::fromRecommendedSettings()
-     * @covers ::process()
-     * @covers ::extractContentType()
-     *
-     * @uses \Lcobucci\ContentNegotiation\UnformattedResponse
-     * @uses \Lcobucci\ContentNegotiation\Formatter\Json
-     * @uses \Lcobucci\ContentNegotiation\Formatter\NotAcceptable
-     */
+    #[PHPUnit\Test]
     public function processShouldReturnAResponseWithErrorWhenFormatterWasNotFound(): void
     {
         $middleware = $this->createMiddleware();
@@ -83,18 +68,7 @@ final class ContentTypeMiddlewareTest extends TestCase
         self::assertSame('text/plain; charset=UTF-8', $response->getHeaderLine('Content-Type'));
     }
 
-    /**
-     * @test
-     *
-     * @covers ::__construct()
-     * @covers ::fromRecommendedSettings()
-     * @covers ::process()
-     * @covers ::extractContentType()
-     *
-     * @uses \Lcobucci\ContentNegotiation\UnformattedResponse
-     * @uses \Lcobucci\ContentNegotiation\Formatter\ContentOnly
-     * @uses \Lcobucci\ContentNegotiation\Formatter\Json
-     */
+    #[PHPUnit\Test]
     public function processShouldReturnAResponseWithFormattedContent(): void
     {
         $middleware = $this->createMiddleware();
@@ -110,18 +84,7 @@ final class ContentTypeMiddlewareTest extends TestCase
         self::assertJsonStringEqualsJsonString('{"id":1,"name":"Testing"}', (string) $response->getBody());
     }
 
-    /**
-     * @test
-     *
-     * @covers ::__construct()
-     * @covers ::fromRecommendedSettings()
-     * @covers ::process()
-     * @covers ::extractContentType()
-     *
-     * @uses \Lcobucci\ContentNegotiation\UnformattedResponse
-     * @uses \Lcobucci\ContentNegotiation\Formatter\ContentOnly
-     * @uses \Lcobucci\ContentNegotiation\Formatter\Json
-     */
+    #[PHPUnit\Test]
     public function processShouldPassAttributesToTheFormatterProperly(): void
     {
         $middleware = $this->createMiddleware();
@@ -141,18 +104,7 @@ final class ContentTypeMiddlewareTest extends TestCase
         self::assertStringContainsString('<dd>Testing</dd>', $body);
     }
 
-    /**
-     * @test
-     *
-     * @covers ::__construct()
-     * @covers ::fromRecommendedSettings()
-     * @covers ::process()
-     * @covers ::extractContentType()
-     *
-     * @uses \Lcobucci\ContentNegotiation\UnformattedResponse
-     * @uses \Lcobucci\ContentNegotiation\Formatter\ContentOnly
-     * @uses \Lcobucci\ContentNegotiation\Formatter\Json
-     */
+    #[PHPUnit\Test]
     public function processShouldReturnAResponseWithFormattedContentEvenWithoutForcingTheCharset(): void
     {
         $middleware = $this->createMiddleware(false);
