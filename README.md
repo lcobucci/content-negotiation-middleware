@@ -183,7 +183,7 @@ MIT, see [LICENSE].
 [Total Downloads]: https://img.shields.io/packagist/dt/lcobucci/content-negotiation-middleware.svg?style=flat-square
 [Latest Stable Version]: https://img.shields.io/packagist/v/lcobucci/content-negotiation-middleware.svg?style=flat-square
 [Unstable Version]: https://img.shields.io/packagist/vpre/lcobucci/content-negotiation-middleware.svg?style=flat-square
-[Build Status]: https://img.shields.io/github/workflow/status/lcobucci/content-negotiation-middleware/PHPUnit%20tests/3.1?style=flat-square
+[Build Status]: https://img.shields.io/github/actions/workflow/status/lcobucci/content-negotiation-middleware/phpunit.yml?style=flat-square
 [Code Coverage]: https://codecov.io/gh/lcobucci/content-negotiation-middleware/branch/3.1/graph/badge.svg
 [Packagist]: http://packagist.org/packages/lcobucci/content-negotiation-middleware
 [Composer]: http://getcomposer.org
