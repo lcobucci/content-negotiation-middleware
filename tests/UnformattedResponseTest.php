@@ -6,17 +6,13 @@ namespace Lcobucci\ContentNegotiation\Tests;
 use Laminas\Diactoros\Response;
 use Laminas\Diactoros\Stream;
 use Lcobucci\ContentNegotiation\UnformattedResponse;
+use PHPUnit\Framework\Attributes as PHPUnit;
 use PHPUnit\Framework\TestCase;
 
-/** @coversDefaultClass \Lcobucci\ContentNegotiation\UnformattedResponse */
+#[PHPUnit\CoversClass(UnformattedResponse::class)]
 final class UnformattedResponseTest extends TestCase
 {
-    /**
-     * @test
-     *
-     * @covers ::__construct
-     * @covers ::getUnformattedContent()
-     */
+    #[PHPUnit\Test]
     public function getUnformattedContentShouldReturnTheConfiguredValue(): void
     {
         $dto      = new PersonDto(1, 'Testing');
@@ -25,14 +21,7 @@ final class UnformattedResponseTest extends TestCase
         self::assertSame($dto, $response->getUnformattedContent());
     }
 
-    /**
-     * @test
-     *
-     * @covers ::withAttribute()
-     *
-     * @uses \Lcobucci\ContentNegotiation\UnformattedResponse::__construct()
-     * @uses \Lcobucci\ContentNegotiation\UnformattedResponse::getAttributes()
-     */
+    #[PHPUnit\Test]
     public function withAttributeShouldReturnANewInstanceWithTheAddedAttribute(): void
     {
         $response1 = new UnformattedResponse(new Response(), new PersonDto(1, 'Testing'));
@@ -42,14 +31,7 @@ final class UnformattedResponseTest extends TestCase
         self::assertSame(['test' => 1], $response2->getAttributes());
     }
 
-    /**
-     * @test
-     *
-     * @covers ::__construct()
-     * @covers ::withAttribute()
-     *
-     * @uses \Lcobucci\ContentNegotiation\UnformattedResponse::getAttributes()
-     */
+    #[PHPUnit\Test]
     public function withAttributeShouldOverrideExistingAttributes(): void
     {
         $response = new UnformattedResponse(
@@ -61,12 +43,7 @@ final class UnformattedResponseTest extends TestCase
         self::assertSame(['test' => 2], $response->withAttribute('test', 2)->getAttributes());
     }
 
-    /**
-     * @test
-     *
-     * @covers ::__construct()
-     * @covers ::getAttributes()
-     */
+    #[PHPUnit\Test]
     public function getAttributesShouldReturnTheConfiguredAttributes(): void
     {
         $response = new UnformattedResponse(
@@ -78,89 +55,49 @@ final class UnformattedResponseTest extends TestCase
         self::assertSame(['test' => 1], $response->getAttributes());
     }
 
-    /**
-     * @test
-     *
-     * @covers ::__construct
-     * @covers ::getProtocolVersion()
-     */
+    #[PHPUnit\Test]
     public function getProtocolVersionShouldReturnTheSameValueAsTheDecoratedObject(): void
     {
         $this->assertGetterReturn('getProtocolVersion');
     }
 
-    /**
-     * @test
-     *
-     * @covers ::__construct
-     * @covers ::getHeaders()
-     */
+    #[PHPUnit\Test]
     public function getHeadersShouldReturnTheSameValueAsTheDecoratedObject(): void
     {
         $this->assertGetterReturn('getHeaders');
     }
 
-    /**
-     * @test
-     *
-     * @covers ::__construct
-     * @covers ::hasHeader()
-     */
+    #[PHPUnit\Test]
     public function hasHeaderShouldReturnTheSameValueAsTheDecoratedObject(): void
     {
         $this->assertGetterReturn('hasHeader', 'Content-Type');
     }
 
-    /**
-     * @test
-     *
-     * @covers ::__construct
-     * @covers ::getHeader()
-     */
+    #[PHPUnit\Test]
     public function getHeaderShouldReturnTheSameValueAsTheDecoratedObject(): void
     {
         $this->assertGetterReturn('getHeader', 'Content-Type');
     }
 
-    /**
-     * @test
-     *
-     * @covers ::__construct
-     * @covers ::getHeaderLine()
-     */
+    #[PHPUnit\Test]
     public function getHeaderLineShouldReturnTheSameValueAsTheDecoratedObject(): void
     {
         $this->assertGetterReturn('getHeaderLine', 'Content-Type');
     }
 
-    /**
-     * @test
-     *
-     * @covers ::__construct
-     * @covers ::getBody()
-     */
+    #[PHPUnit\Test]
     public function getBodyShouldReturnTheSameValueAsTheDecoratedObject(): void
     {
         $this->assertGetterReturn('getBody');
     }
 
-    /**
-     * @test
-     *
-     * @covers ::__construct
-     * @covers ::getStatusCode()
-     */
+    #[PHPUnit\Test]
     public function getStatusCodeShouldReturnTheSameValueAsTheDecoratedObject(): void
     {
         $this->assertGetterReturn('getStatusCode');
     }
 
-    /**
-     * @test
-     *
-     * @covers ::__construct
-     * @covers ::getReasonPhrase()
-     */
+    #[PHPUnit\Test]
     public function getReasonPhraseShouldReturnTheSameValueAsTheDecoratedObject(): void
     {
         $this->assertGetterReturn('getReasonPhrase');
@@ -174,67 +111,37 @@ final class UnformattedResponseTest extends TestCase
         self::assertSame($decoratedResponse->$method(...$arguments), $response->$method(...$arguments));
     }
 
-    /**
-     * @test
-     *
-     * @covers ::__construct
-     * @covers ::withProtocolVersion()
-     */
+    #[PHPUnit\Test]
     public function withProtocolVersionShouldReturnANewInstanceWithTheModifiedDecoratedObject(): void
     {
         $this->assertSetterReturn('withProtocolVersion', '2');
     }
 
-    /**
-     * @test
-     *
-     * @covers ::__construct
-     * @covers ::withHeader()
-     */
+    #[PHPUnit\Test]
     public function withHeaderShouldReturnANewInstanceWithTheModifiedDecoratedObject(): void
     {
         $this->assertSetterReturn('withHeader', 'Content-Type', 'application/json');
     }
 
-    /**
-     * @test
-     *
-     * @covers ::__construct
-     * @covers ::withAddedHeader()
-     */
+    #[PHPUnit\Test]
     public function withAddedHeaderShouldReturnANewInstanceWithTheModifiedDecoratedObject(): void
     {
         $this->assertSetterReturn('withAddedHeader', 'Content-Type', 'application/json');
     }
 
-    /**
-     * @test
-     *
-     * @covers ::__construct
-     * @covers ::withoutHeader()
-     */
+    #[PHPUnit\Test]
     public function withoutHeaderShouldReturnANewInstanceWithTheModifiedDecoratedObject(): void
     {
         $this->assertSetterReturn('withoutHeader', 'Content-Type');
     }
 
-    /**
-     * @test
-     *
-     * @covers ::__construct
-     * @covers ::withBody()
-     */
+    #[PHPUnit\Test]
     public function withBodyShouldReturnANewInstanceWithTheModifiedDecoratedObject(): void
     {
         $this->assertSetterReturn('withBody', new Stream('php://temp', 'wb+'));
     }
 
-    /**
-     * @test
-     *
-     * @covers ::__construct
-     * @covers ::withStatus()
-     */
+    #[PHPUnit\Test]
     public function withStatusShouldReturnANewInstanceWithTheModifiedDecoratedObject(): void
     {
         $this->assertSetterReturn('withStatus', 202);

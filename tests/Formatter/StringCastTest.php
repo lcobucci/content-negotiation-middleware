@@ -3,31 +3,32 @@ declare(strict_types=1);
 
 namespace Lcobucci\ContentNegotiation\Tests\Formatter;
 
+use Laminas\Diactoros\Response;
+use Laminas\Diactoros\StreamFactory;
 use Lcobucci\ContentNegotiation\ContentCouldNotBeFormatted;
+use Lcobucci\ContentNegotiation\Formatter\ContentOnly;
 use Lcobucci\ContentNegotiation\Formatter\StringCast;
+use Lcobucci\ContentNegotiation\UnformattedResponse;
+use PHPUnit\Framework\Attributes as PHPUnit;
 use PHPUnit\Framework\TestCase;
 use Stringable;
 
-/** @coversDefaultClass \Lcobucci\ContentNegotiation\Formatter\StringCast */
+#[PHPUnit\CoversClass(StringCast::class)]
+#[PHPUnit\CoversClass(ContentOnly::class)]
+#[PHPUnit\UsesClass(UnformattedResponse::class)]
 final class StringCastTest extends TestCase
 {
-    /**
-     * @test
-     * @dataProvider validData
-     *
-     * @covers ::formatContent()
-     */
+    #[PHPUnit\Test]
+    #[PHPUnit\DataProvider('validData')]
     public function formatShouldSimplyReturnTheStringRepresentationOfTheContent(
         string $expected,
         mixed $content,
     ): void {
-        $formatter = new StringCast();
-
-        self::assertSame($expected, $formatter->formatContent($content));
+        self::assertSame($expected, $this->format($content));
     }
 
-    /** @return mixed[][] */
-    public function validData(): array
+    /** @return iterable<array{string, mixed}> */
+    public static function validData(): iterable
     {
         $test = new class
         {
@@ -45,45 +46,40 @@ final class StringCastTest extends TestCase
             }
         };
 
-        return [
-            ['test',  'test'],
-            ['test',  $test],
-            ['test2',  $test2],
-            ['1',  1],
-            ['1.1',  1.1],
-            ['1',  true],
-            ['',  false],
-            ['',  null],
-        ];
+        yield ['test', 'test'];
+        yield ['test', $test];
+        yield ['test2', $test2];
+        yield ['1', 1];
+        yield ['1.1', 1.1];
+        yield ['1', true];
+        yield ['', false];
+        yield ['', null];
     }
 
-    /**
-     * @test
-     *
-     * @covers ::formatContent()
-     */
+    #[PHPUnit\Test]
     public function formatShouldRaiseExceptionWhenContentCouldNotBeCastToString(): void
     {
         $this->expectException(ContentCouldNotBeFormatted::class);
 
-        $content = new class
-        {
-        };
-
-        $formatter = new StringCast();
-        $formatter->formatContent($content);
+        $this->format(new class () {
+        });
     }
 
-    /**
-     * @test
-     *
-     * @covers ::formatContent()
-     */
+    #[PHPUnit\Test]
     public function formatShouldRaiseExceptionWhenContentIsAnArray(): void
     {
         $this->expectException(ContentCouldNotBeFormatted::class);
 
+        $this->format([]);
+    }
+
+    private function format(mixed $content): string
+    {
         $formatter = new StringCast();
-        $formatter->formatContent([]);
+
+        return (string) $formatter->format(
+            new UnformattedResponse(new Response(), $content),
+            new StreamFactory(),
+        )->getBody();
     }
 }

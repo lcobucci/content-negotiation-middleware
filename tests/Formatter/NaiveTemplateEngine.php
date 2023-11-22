@@ -19,7 +19,7 @@ final class NaiveTemplateEngine extends ContentOnly
     private const EXTENSION = 'html';
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function formatContent(mixed $content, array $attributes = []): string
     {

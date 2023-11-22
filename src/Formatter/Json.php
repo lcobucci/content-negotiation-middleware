@@ -24,7 +24,7 @@ final class Json extends ContentOnly
     {
     }
 
-    /** {@inheritdoc} */
+    /** {@inheritDoc} */
     // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     public function formatContent(mixed $content, array $attributes = []): string
     {

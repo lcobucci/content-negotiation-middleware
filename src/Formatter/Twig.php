@@ -20,7 +20,7 @@ final class Twig extends ContentOnly
     ) {
     }
 
-    /** {@inheritdoc} */
+    /** {@inheritDoc} */
     public function formatContent(mixed $content, array $attributes = []): string
     {
         try {
