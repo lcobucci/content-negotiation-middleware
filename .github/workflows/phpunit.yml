@@ -18,9 +18,8 @@ jobs:
           - "locked"
           - "development"
         php-version:
-          - "8.1"
-          - "8.2"
           - "8.3"
+        #  - "8.4" we still need a dependency to be PHP 8.4 compatible
         operating-system:
           - "ubuntu-latest"
 

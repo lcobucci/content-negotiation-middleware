@@ -6,7 +6,6 @@
     beStrictAboutOutputDuringTests="true"
     beStrictAboutChangesToGlobalState="true"
     beStrictAboutCoverageMetadata="true"
-    beStrictAboutTodoAnnotatedTests="true"
     failOnRisky="true"
     failOnWarning="true"
     executionOrder="random"
