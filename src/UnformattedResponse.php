@@ -26,8 +26,7 @@ final class UnformattedResponse implements ResponseInterface
         return $this->decoratedResponse->getProtocolVersion();
     }
 
-    /** {@inheritDoc} */
-    public function withProtocolVersion($version)
+    public function withProtocolVersion(string $version): self
     {
         return new self(
             $this->decoratedResponse->withProtocolVersion($version),
@@ -42,26 +41,24 @@ final class UnformattedResponse implements ResponseInterface
         return $this->decoratedResponse->getHeaders();
     }
 
-    /** {@inheritDoc} */
-    public function hasHeader($name): bool
+    public function hasHeader(string $name): bool
     {
         return $this->decoratedResponse->hasHeader($name);
     }
 
     /** {@inheritDoc} */
-    public function getHeader($name)
+    public function getHeader(string $name): array
     {
         return $this->decoratedResponse->getHeader($name);
     }
 
     /** {@inheritDoc} */
-    public function getHeaderLine($name): string
+    public function getHeaderLine(string $name): string
     {
         return $this->decoratedResponse->getHeaderLine($name);
     }
 
-    /** {@inheritDoc} */
-    public function withHeader($name, $value)
+    public function withHeader(string $name, mixed $value): self
     {
         return new self(
             $this->decoratedResponse->withHeader($name, $value),
@@ -70,8 +67,7 @@ final class UnformattedResponse implements ResponseInterface
         );
     }
 
-    /** {@inheritDoc} */
-    public function withAddedHeader($name, $value)
+    public function withAddedHeader(string $name, mixed $value): self
     {
         return new self(
             $this->decoratedResponse->withAddedHeader($name, $value),
@@ -80,8 +76,7 @@ final class UnformattedResponse implements ResponseInterface
         );
     }
 
-    /** {@inheritDoc} */
-    public function withoutHeader($name)
+    public function withoutHeader(string $name): self
     {
         return new self(
             $this->decoratedResponse->withoutHeader($name),
@@ -95,8 +90,7 @@ final class UnformattedResponse implements ResponseInterface
         return $this->decoratedResponse->getBody();
     }
 
-    /** {@inheritDoc} */
-    public function withBody(StreamInterface $body)
+    public function withBody(StreamInterface $body): self
     {
         return new self(
             $this->decoratedResponse->withBody($body),
@@ -110,8 +104,7 @@ final class UnformattedResponse implements ResponseInterface
         return $this->decoratedResponse->getStatusCode();
     }
 
-    /** {@inheritDoc} */
-    public function withStatus($code, $reasonPhrase = '')
+    public function withStatus(int $code, string $reasonPhrase = ''): self
     {
         return new self(
             $this->decoratedResponse->withStatus($code, $reasonPhrase),
