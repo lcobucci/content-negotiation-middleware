@@ -36,7 +36,7 @@ jobs:
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
 
       - name: "Cache dependencies"
-        uses: "actions/cache@v4.0.0"
+        uses: "actions/cache@v4.0.2"
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('**/composer.lock') }}"
@@ -58,4 +58,4 @@ jobs:
         run: "make infection PHPUNIT_FLAGS=--coverage-clover=coverage.xml"
 
       - name: "Upload Code Coverage"
-        uses: "codecov/codecov-action@v4.0.0"
+        uses: "codecov/codecov-action@v4.5.0"
