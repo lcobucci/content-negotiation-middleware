@@ -120,7 +120,7 @@ final class ContentTypeMiddlewareTest extends TestCase
         self::assertJsonStringEqualsJsonString('{"id":1,"name":"Testing"}', (string) $response->getBody());
     }
 
-    /** @param mixed[] $attributes */
+    /** @param array<string, mixed> $attributes */
     private function createResponse(array $attributes = []): UnformattedResponse
     {
         return new UnformattedResponse(
