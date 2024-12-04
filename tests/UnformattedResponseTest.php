@@ -8,6 +8,7 @@ use Laminas\Diactoros\Stream;
 use Lcobucci\ContentNegotiation\UnformattedResponse;
 use PHPUnit\Framework\Attributes as PHPUnit;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\ResponseInterface;
 
 #[PHPUnit\CoversClass(UnformattedResponse::class)]
 final class UnformattedResponseTest extends TestCase
@@ -152,13 +153,19 @@ final class UnformattedResponseTest extends TestCase
         $decoratedResponse = new Response();
         $dto               = new PersonDto(1, 'Testing');
 
+        $expectedDecoratedResponse = $decoratedResponse->$method(...$arguments);
+        self::assertInstanceOf(ResponseInterface::class, $expectedDecoratedResponse);
+
         $response = new UnformattedResponse($decoratedResponse, $dto, ['test' => 1]);
         $expected = new UnformattedResponse(
-            $decoratedResponse->$method(...$arguments),
+            $expectedDecoratedResponse,
             $dto,
             ['test' => 1],
         );
 
-        self::assertEquals($expected, $response->$method(...$arguments));
+        $givenDecoratedResponse = $response->$method(...$arguments);
+
+        self::assertInstanceOf(ResponseInterface::class, $givenDecoratedResponse);
+        self::assertEquals($expected, $givenDecoratedResponse);
     }
 }

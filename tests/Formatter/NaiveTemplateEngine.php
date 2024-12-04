@@ -25,6 +25,7 @@ final class NaiveTemplateEngine extends ContentOnly
     {
         $template = $this->getTemplateContent($attributes);
 
+        // @phpstan-ignore argument.type
         return $this->render($template, (array) $content);
     }
 
@@ -41,7 +42,7 @@ final class NaiveTemplateEngine extends ContentOnly
         return $content;
     }
 
-    /** @param mixed[] $data */
+    /** @param array<string, mixed> $data */
     private function render(string $template, array $data): string
     {
         $variables = array_map(
@@ -51,6 +52,7 @@ final class NaiveTemplateEngine extends ContentOnly
             array_keys($data),
         );
 
+        // @phpstan-ignore argument.type
         return trim(str_replace($variables, $data, $template));
     }
 }
