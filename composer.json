@@ -19,18 +19,18 @@
     },
     "require-dev": {
         "infection/infection": "^0.29",
-        "jms/serializer": "^3.30.0",
-        "laminas/laminas-diactoros": "^3.4.0",
+        "jms/serializer": "^3.31",
+        "laminas/laminas-diactoros": "^3.5",
         "lcobucci/coding-standard": "^11.1",
-        "league/plates": "^3.5.0",
+        "league/plates": "^3.6",
         "middlewares/negotiation": "^2.1",
-        "phpstan/extension-installer": "^1.4.1",
-        "phpstan/phpstan": "^2.0.0",
-        "phpstan/phpstan-deprecation-rules": "^2.0.0",
-        "phpstan/phpstan-phpunit": "^2.0.0",
-        "phpstan/phpstan-strict-rules": "^2.0.0",
-        "phpunit/phpunit": "^11.3",
-        "twig/twig": "^3.14.1"
+        "phpstan/extension-installer": "^1.4.3",
+        "phpstan/phpstan": "^2.0",
+        "phpstan/phpstan-deprecation-rules": "^2.0",
+        "phpstan/phpstan-phpunit": "^2.0",
+        "phpstan/phpstan-strict-rules": "^2.0",
+        "phpunit/phpunit": "^11.4",
+        "twig/twig": "^3.16"
     },
     "suggest": {
         "jms/serializer": "For content formatting using a more flexible serializer",
