@@ -30,7 +30,7 @@
         "phpstan/phpstan-phpunit": "^2.0",
         "phpstan/phpstan-strict-rules": "^2.0",
         "phpunit/phpunit": "^11.4",
-        "twig/twig": "^3.16"
+        "twig/twig": "^3.27.0"
     },
     "suggest": {
         "jms/serializer": "For content formatting using a more flexible serializer",
