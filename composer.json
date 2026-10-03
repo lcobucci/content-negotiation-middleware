@@ -21,7 +21,7 @@
         "infection/infection": "^0.29",
         "jms/serializer": "^3.31",
         "laminas/laminas-diactoros": "^3.5",
-        "lcobucci/coding-standard": "^11.1",
+        "lcobucci/coding-standard": "^12.0",
         "league/plates": "^3.6",
         "middlewares/negotiation": "^2.1",
         "phpstan/extension-installer": "^1.4.3",
