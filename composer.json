@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-        "php": "~8.3.0 || ~8.4.0",
+        "php": "~8.3.0 || ~8.4.0 || ~8.5.0",
         "ext-json": "*",
         "fig/http-message-util": "^1.1.5",
         "psr/http-factory": "^1.1",
@@ -18,7 +18,7 @@
         "psr/http-server-middleware": "^1.0.2"
     },
     "require-dev": {
-        "infection/infection": "^0.29",
+        "infection/infection": "^0.35",
         "jms/serializer": "^3.31",
         "laminas/laminas-diactoros": "^3.5",
         "lcobucci/coding-standard": "^11.1",
